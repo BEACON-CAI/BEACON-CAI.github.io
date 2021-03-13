@@ -271,13 +271,13 @@
 <p>5.编码，例 &lt;img src=x onerror=alert(‘xss’)&gt; 经过HTML编码为： <img src=x onerror=&#x61;&#x6c;&#x65;&#x72;&#x74;&#x28;&#x27;&#x78;&#x73;&#x73;&#x27;&#x29;> </p>
 <h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><h3 id="反射型xss（get-or-post）"><a href="#反射型xss（get-or-post）" class="headerlink" title="反射型xss（get or post）"></a>反射型xss（get or post）</h3><p>先判断有无过滤，然后写入xss代码</p>
 <p>示例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;alert(&quot;BEACON&quot;)&lt;&#x2F;script&gt; </span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript">alert(<span class="string">&quot;BEACON&quot;</span>)</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span> </span><br></pre></td></tr></table></figure>
 
 <h3 id="存储型xss"><a href="#存储型xss" class="headerlink" title="存储型xss"></a>存储型xss</h3><p>寻找输入点，然后进行xss攻击</p>
 <h3 id="DOM型XSS"><a href="#DOM型XSS" class="headerlink" title="DOM型XSS"></a>DOM型XSS</h3><h4 id="例一："><a href="#例一：" class="headerlink" title="例一："></a>例一：</h4><p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://img2020.cnblogs.com/blog/2256438/202102/2256438-20210221173637274-1162009598.png"
+                     data-src="/img/2256438-20210221173637274-1162009598.png"
                       alt="img"
                 ></p>
 <p>我们先通过 “&gt; 闭合了herf标签，然后再插入相应的payload</p>
@@ -290,7 +290,7 @@
 <h4 id="例二："><a href="#例二：" class="headerlink" title="例二："></a>例二：</h4><p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="../img/2256438-20210221174421289-1365465828-1615636634143.png"
+                     data-src="/img/2256438-20210221174421289-1365465828-1615636634143.png"
                       alt="img"
                 ></p>
 <p>与前面不同的是，前面通过 getElementById 获取到了标签 Id 为 text的内容赋值给str</p>
