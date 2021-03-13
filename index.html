@@ -17,7 +17,7 @@
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zn-ch","path":"search.json"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/BEACON3.svg","favicon":"/images/BEACON5.svg","article_img_align":"center","left_side_width":"260px","content_max_width":"920px","hover":{"enable":true,"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"BEACON FOREVER."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.1"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/BEACON3.svg","favicon":"/images/BEACON5.svg","article_img_align":"center","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"BEACON FOREVER."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.1"};
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
   </script>
 <meta name="generator" content="Hexo 5.4.0"></head>
@@ -171,10 +171,10 @@
 
                 <div class="home-article-content markdown-body">
                     
-                         SQL注入即开发者对用户输入参数没有做到严格过滤，导致用户输入数据能够影响预设的查询功能
+                        SQL-SQL注入基础SQL注入即开发者对用户输入参数没有做到严格过滤，导致用户输入数据能够影响预设的查询功能
 通常表现为数据库原有信息被泄露、篡改，甚至删除
 UNION注入-数字型注入前提：用户通过传入的id等参数，可以从数据库中查询相应的记录
-对字符型注入的判断：判...
+对...
                     
                 </div>
 
@@ -187,7 +187,7 @@ UNION注入-数字型注入前提：用户通过传入的id等参数，可以从
                     
                         <li>
                             
-                            <a href="/categories/World/">World</a>&nbsp;
+                            <a href="/categories/CTF-WEB/">CTF-WEB</a>&nbsp;
                         </li>
                     
                     
@@ -201,7 +201,7 @@ UNION注入-数字型注入前提：用户通过传入的id等参数，可以从
                     
                         <li>
                             
-                            <a href="/tags/Hello/">Hello</a>&nbsp;
+                            <a href="/tags/SQL/">SQL</a>&nbsp;
                         </li>
                     
                 </ul>
@@ -344,10 +344,6 @@ UNION注入-数字型注入前提：用户通过传入的id等参数，可以从
         
 
         
-            <li class="tools-item tool-scroll-to-top flex-center">
-                <i class="fas fa-arrow-up"></i>
-            </li>
-        
 
         <li class="tools-item tool-scroll-to-bottom flex-center">
             <i class="fas fa-arrow-down"></i>
@@ -358,6 +354,11 @@ UNION注入-数字型注入前提：用户通过传入的id等参数，可以从
         <li class="tools-item tool-toggle-show flex-center">
             <i class="fas fa-cog fa-spin"></i>
         </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
         
     </ul>
 </div>
