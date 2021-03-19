@@ -9,7 +9,7 @@
     
     <title>
         
-            SQL-SQL注入进阶 |
+            SQL-SQL注入进阶与绕过技术 |
         
         BEACON
     </title>
@@ -64,7 +64,7 @@
                             <a class=""
                                href="/"
                             >
-                                HOME
+                                首页
                             </a>
                         </li>
                     
@@ -72,7 +72,7 @@
                             <a class=""
                                href="/archives"
                             >
-                                ARCHIVES
+                                归档
                             </a>
                         </li>
                     
@@ -80,7 +80,7 @@
                             <a class=""
                                href="/categories"
                             >
-                                CATEGORIES
+                                分类
                             </a>
                         </li>
                     
@@ -88,7 +88,7 @@
                             <a class=""
                                href="/tags"
                             >
-                                TAGS
+                                标签
                             </a>
                         </li>
                     
@@ -115,22 +115,22 @@
             
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/">HOME</a>
+                       href="/">首页</a>
                 </li>
             
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/archives">ARCHIVES</a>
+                       href="/archives">归档</a>
                 </li>
             
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/categories">CATEGORIES</a>
+                       href="/categories">分类</a>
                 </li>
             
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/tags">TAGS</a>
+                       href="/tags">标签</a>
                 </li>
             
         </ul>
@@ -152,7 +152,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">SQL-SQL注入进阶</span>
+            <span class="title-hover-animation">SQL-SQL注入进阶与绕过技术</span>
         </div>
 
         
@@ -204,12 +204,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>670 Words</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.3k 字</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>2 Mins</span>
+            <i class="fas fa-clock"></i>&nbsp;<span>5 分钟</span>
         </span>
     
     
@@ -225,7 +225,7 @@
         
 
         <div class="article-content markdown-body">
-            <h1 id="SQL-SQL注入进阶"><a href="#SQL-SQL注入进阶" class="headerlink" title="SQL-SQL注入进阶"></a>SQL-SQL注入进阶</h1><h2 id="堆叠查询注入攻击"><a href="#堆叠查询注入攻击" class="headerlink" title="堆叠查询注入攻击"></a>堆叠查询注入攻击</h2><p>堆叠查询可执行多条语句，多语句之间以句号分隔</p>
+            <h1 id="SQL-SQL注入进阶与绕过技术"><a href="#SQL-SQL注入进阶与绕过技术" class="headerlink" title="SQL-SQL注入进阶与绕过技术"></a>SQL-SQL注入进阶与绕过技术</h1><h2 id="SQL注入进阶"><a href="#SQL注入进阶" class="headerlink" title="SQL注入进阶"></a>SQL注入进阶</h2><h3 id="堆叠查询注入攻击"><a href="#堆叠查询注入攻击" class="headerlink" title="堆叠查询注入攻击"></a>堆叠查询注入攻击</h3><p>堆叠查询可执行多条语句，多语句之间以句号分隔</p>
 <p>mysql_multi_query() 支持多条sql语句同时执行，即用’;’分隔多句SQL语句</p>
 <p>注入示例：<a class="link"   target="_blank" rel="noopener" href="https://buuoj.cn/challenges#[%E5%BC%BA%E7%BD%91%E6%9D%AF%202019]%E9%9A%8F%E4%BE%BF%E6%B3%A8" >题目环境<i class="fas fa-external-link-alt"></i></a>[强网杯 2019]随便注</p>
 <p>由于该题限制了某些SQL语句</p>
@@ -249,12 +249,12 @@
 <p>普通类型堆叠注入与时间输入结合的大致模板</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;;select if(substr(user(),1,1)=&#x27;</span>a<span class="string">&#x27;,sleep(3),1)#</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="二次注入攻击"><a href="#二次注入攻击" class="headerlink" title="二次注入攻击"></a>二次注入攻击</h2><p>二次注入主要分为两部分：</p>
+<h3 id="二次注入攻击"><a href="#二次注入攻击" class="headerlink" title="二次注入攻击"></a>二次注入攻击</h3><p>二次注入主要分为两部分：</p>
 <p>其一是恶意数据的插入</p>
 <p>第一次对数据库进行数据插入的时候，仅对其中特殊字符进行转义，在写入数据库的时候还是保留原来的数据，却是忽略了插入的数据本身包含恶意内容</p>
 <p>其二则是引用恶意数据</p>
 <p>数据存入数据库之后，被认为是可信的，而在下一次查询时，可在没有二次检验的情况下从数据库中取出恶意数据，造成数据库的二次注入</p>
-<h2 id="宽字节注入攻击"><a href="#宽字节注入攻击" class="headerlink" title="宽字节注入攻击"></a>宽字节注入攻击</h2><p>传入的引号被转义符（反斜线）转义，导致参数ID无法逃逸引号的包围</p>
+<h3 id="宽字节注入攻击"><a href="#宽字节注入攻击" class="headerlink" title="宽字节注入攻击"></a>宽字节注入攻击</h3><p>传入的引号被转义符（反斜线）转义，导致参数ID无法逃逸引号的包围</p>
 <blockquote>
 <p>PHP有addslashes()等函数，这类函数会自动过滤 ’ ‘’ null 等这些敏感字符，将它们转义成’ ‘’ \null</p>
 </blockquote>
@@ -264,17 +264,51 @@
 <p>反斜杠的编码为”%5c”</p>
 <p>在GBK编码中，”%df%5c”为繁体字“連”，故可使引号成功逃逸</p>
 <p><a class="link"   target="_blank" rel="noopener" href="https://blog.csdn.net/u011785309/article/details/104582250" >基于pikachu漏洞练习平台的宽字节注入攻击示例<i class="fas fa-external-link-alt"></i></a></p>
-<h2 id="cookie注入攻击"><a href="#cookie注入攻击" class="headerlink" title="cookie注入攻击"></a>cookie注入攻击</h2><p>URL中没有GET参数，但是页面返回正常，使用Burp Suite抓取数据包，发现cookie中存在id=1的参数</p>
+<h3 id="cookie注入攻击"><a href="#cookie注入攻击" class="headerlink" title="cookie注入攻击"></a>cookie注入攻击</h3><p>URL中没有GET参数，但是页面返回正常，使用Burp Suite抓取数据包，发现cookie中存在id=1的参数</p>
 <p>修改id值判断cookie中的参数ID是否存在SQK注入</p>
 <p>若存在，即使用union注入方法即可</p>
 <p>cookie注入与其他注入方式不同的仅在与注入点不同罢了</p>
-<h2 id="base64注入攻击"><a href="#base64注入攻击" class="headerlink" title="base64注入攻击"></a>base64注入攻击</h2><p>原理即为将所需传递的参数经过base64加密后再传输</p>
-<h2 id="XFF注入攻击"><a href="#XFF注入攻击" class="headerlink" title="XFF注入攻击"></a>XFF注入攻击</h2><p>抓取数据包在HTTP请求头中有一头部参数”X-Forwarded-for”</p>
+<h3 id="base64注入攻击"><a href="#base64注入攻击" class="headerlink" title="base64注入攻击"></a>base64注入攻击</h3><p>原理即为将所需传递的参数经过base64加密后再传输</p>
+<h3 id="XFF注入攻击"><a href="#XFF注入攻击" class="headerlink" title="XFF注入攻击"></a>XFF注入攻击</h3><p>抓取数据包在HTTP请求头中有一头部参数”X-Forwarded-for”</p>
 <p>其简称为XFF头，代表客户端真实IP</p>
 <p>修改其值可伪造客户端IP</p>
 <p>将XFF值视为基本注入情况中的id值进行类似注入即可</p>
 <p>示例：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X<span class="operator">-</span>Forwarded<span class="operator">-</span><span class="keyword">for</span>:<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span><span class="string">&#x27;union select 1,2,3#</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="SQL绕过技术"><a href="#SQL绕过技术" class="headerlink" title="SQL绕过技术"></a>SQL绕过技术</h2><h3 id="大小写绕过注入"><a href="#大小写绕过注入" class="headerlink" title="大小写绕过注入"></a>大小写绕过注入</h3><p>示例：</p>
+<p>访问id=1 and 1=1</p>
+<p>页面被拦截，即说明有关键词被过滤</p>
+<p>尝试修改关键词大小写方式绕过</p>
+<p>如：And 1=1 或：aNd 1=1 或：anD 等等（任意字母大小写皆可ANd,aND and so on）</p>
+<p>示例：</p>
+<p>使用order by查询字段数量</p>
+<p>页面被拦截</p>
+<p>尝试同上方法修改order的部分字母大小写</p>
+<p>可行的话即by没有被拦截</p>
+<p>若也被拦截，就继续绕过</p>
+<h3 id="双写绕过注入"><a href="#双写绕过注入" class="headerlink" title="双写绕过注入"></a>双写绕过注入</h3><p>从报错中的错误信息中发现，输入的and 1=1变成了1=1</p>
+<p>由此可得，关键词and被过滤</p>
+<p>尝试使用双写方式绕过</p>
+<p>示例：anandd 1=1 或：aandnd 1=1 and so on</p>
+<p>如若使用order by查询字段数量时，错误信息显示输入变成“der by”</p>
+<p>即可发现order整个单词没有被过滤，仅仅是or被过滤了</p>
+<p>此时只需要双写or即可</p>
+<h3 id="编码绕过注入"><a href="#编码绕过注入" class="headerlink" title="编码绕过注入"></a>编码绕过注入</h3><p>示例：</p>
+<p>访问id=1 and 1=1 或id=1 and 1=2 等等</p>
+<p>页面被拦截，即有关键词被拦截</p>
+<p>尝试使用url全编码的方式绕过</p>
+<ul>
+<li><input disabled="" type="checkbox"> 注意：url编码方式需选择全编码，而不是普通的url编码</li>
+</ul>
+<p>关键词and进行两次全编码结果：%25%36%31%25%36%65%25%36%34</p>
+<p>即访问：id=1 %25%36%31%25%36%65%25%36%34 1=1</p>
+<p>附：在网上难找到在线的url全编码工具，但是找到一个<a class="link"   target="_blank" rel="noopener" href="https://blog.csdn.net/qq_31129545/article/details/101208047" >python脚本<i class="fas fa-external-link-alt"></i></a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span>():</span></span><br><span class="line">    clearFlag = <span class="string">&quot;y&quot;</span></span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>):</span><br><span class="line">        <span class="keyword">if</span> clearFlag == <span class="string">&quot;y&quot;</span> <span class="keyword">or</span> clearFlag == <span class="string">&quot;Y&quot;</span>:</span><br><span class="line">            os.system(<span class="string">&quot;cls&quot;</span>)</span><br><span class="line">        clearFlag = <span class="string">&quot;&quot;</span></span><br><span class="line">        string = <span class="built_in">input</span>(<span class="string">&quot;请输入需要转换的字符串 :&quot;</span>)</span><br><span class="line">        <span class="built_in">type</span> = <span class="built_in">input</span>(<span class="string">&quot;请选择操作类型(1：加密 2：解密) :&quot;</span>)</span><br><span class="line">        <span class="keyword">while</span>(<span class="built_in">type</span> != <span class="string">&quot;1&quot;</span> <span class="keyword">and</span> <span class="built_in">type</span> != <span class="string">&quot;2&quot;</span>):</span><br><span class="line">            <span class="built_in">type</span> = <span class="built_in">input</span>(<span class="string">&quot;操作类型输入错误，请重新选择(1：加密 2：解密) :&quot;</span>)</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">type</span> == <span class="string">&quot;1&quot;</span> :</span><br><span class="line">            encode_string = encode(string)</span><br><span class="line">            print(<span class="string">&quot;编码结果为：&quot;</span>+encode_string+<span class="string">&quot;\n&quot;</span>)</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">type</span> == <span class="string">&quot;2&quot;</span> :</span><br><span class="line">            decode_string = decode(string)</span><br><span class="line">            print(<span class="string">&quot;解码结果为：&quot;</span>+decode_string+<span class="string">&quot;【请注意前后空格】\n&quot;</span>)</span><br><span class="line">        clearFlag = <span class="built_in">input</span>(<span class="string">&quot;按Y/y清空屏幕继续:&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#编码</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">encode</span>(<span class="params">string</span>):</span></span><br><span class="line">    encode_string = <span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="keyword">for</span> char <span class="keyword">in</span> string:</span><br><span class="line">        encode_char = <span class="built_in">hex</span>(<span class="built_in">ord</span>(char)).replace(<span class="string">&quot;0x&quot;</span>,<span class="string">&quot;%&quot;</span>)</span><br><span class="line">        encode_string += encode_char</span><br><span class="line">    <span class="keyword">return</span> encode_string</span><br><span class="line"></span><br><span class="line"><span class="comment">#解码</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">decode</span>(<span class="params">string</span>):</span></span><br><span class="line">    decode_string = <span class="string">&quot;&quot;</span></span><br><span class="line">    string_arr = string.split(<span class="string">&quot;%&quot;</span>)</span><br><span class="line">    string_arr.pop(<span class="number">0</span>)           <span class="comment">#删除第一个空元素</span></span><br><span class="line">    <span class="keyword">for</span> char <span class="keyword">in</span> string_arr:</span><br><span class="line">        decode_char = <span class="built_in">chr</span>(<span class="built_in">eval</span>(<span class="string">&quot;0x&quot;</span>+char))</span><br><span class="line">        decode_string += decode_char</span><br><span class="line">    <span class="keyword">return</span> decode_string</span><br><span class="line"></span><br><span class="line">main()</span><br></pre></td></tr></table></figure>
+
+<h3 id="内联注释绕过"><a href="#内联注释绕过" class="headerlink" title="内联注释绕过"></a>内联注释绕过</h3><p>同样在关键词被绕过的情况下，可尝试使用内联注释绕过</p>
+<p>访问</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id<span class="operator">=</span><span class="number">1</span> <span class="comment">/*!and*/</span> <span class="number">1</span><span class="operator">=</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
 
 
         </div>
@@ -294,7 +328,7 @@
                             </span>
                             <span class="title flex-center">
                                 <span class="post-nav-title-item">SQL-[sqli-labs]</span>
-                                <span class="post-nav-item">Prev posts</span>
+                                <span class="post-nav-item">上一篇</span>
                             </span>
                         </a>
                     </div>
@@ -307,7 +341,7 @@
                         >
                             <span class="title flex-center">
                                 <span class="post-nav-title-item">SQL-SQL注入基础</span>
-                                <span class="post-nav-item">Next posts</span>
+                                <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex-center">
                               <i class="fas fa-chevron-right"></i>
@@ -343,18 +377,18 @@
             <div class="website-count info-item">
                 
                     <span id="busuanzi_container_site_uv">
-                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                        访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
                     </span>
                 
                 
                     <span id="busuanzi_container_site_pv">
-                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                        总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
                     </span>
                 
             </div>
         
         <div class="theme-info info-item">
-            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.1</a>
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.1</a>
         </div>
         
     </div>
@@ -429,7 +463,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SQL-SQL%E6%B3%A8%E5%85%A5%E8%BF%9B%E9%98%B6"><span class="nav-number">1.</span> <span class="nav-text">SQL-SQL注入进阶</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A0%86%E5%8F%A0%E6%9F%A5%E8%AF%A2%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB"><span class="nav-number">1.1.</span> <span class="nav-text">堆叠查询注入攻击</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E6%AC%A1%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB"><span class="nav-number">1.2.</span> <span class="nav-text">二次注入攻击</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%BD%E5%AD%97%E8%8A%82%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB"><span class="nav-number">1.3.</span> <span class="nav-text">宽字节注入攻击</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cookie%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB"><span class="nav-number">1.4.</span> <span class="nav-text">cookie注入攻击</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#base64%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB"><span class="nav-number">1.5.</span> <span class="nav-text">base64注入攻击</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XFF%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB"><span class="nav-number">1.6.</span> <span class="nav-text">XFF注入攻击</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SQL-SQL%E6%B3%A8%E5%85%A5%E8%BF%9B%E9%98%B6%E4%B8%8E%E7%BB%95%E8%BF%87%E6%8A%80%E6%9C%AF"><span class="nav-number">1.</span> <span class="nav-text">SQL-SQL注入进阶与绕过技术</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL%E6%B3%A8%E5%85%A5%E8%BF%9B%E9%98%B6"><span class="nav-number">1.1.</span> <span class="nav-text">SQL注入进阶</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A0%86%E5%8F%A0%E6%9F%A5%E8%AF%A2%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB"><span class="nav-number">1.1.1.</span> <span class="nav-text">堆叠查询注入攻击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E6%AC%A1%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB"><span class="nav-number">1.1.2.</span> <span class="nav-text">二次注入攻击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%BD%E5%AD%97%E8%8A%82%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB"><span class="nav-number">1.1.3.</span> <span class="nav-text">宽字节注入攻击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cookie%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB"><span class="nav-number">1.1.4.</span> <span class="nav-text">cookie注入攻击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#base64%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB"><span class="nav-number">1.1.5.</span> <span class="nav-text">base64注入攻击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XFF%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB"><span class="nav-number">1.1.6.</span> <span class="nav-text">XFF注入攻击</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL%E7%BB%95%E8%BF%87%E6%8A%80%E6%9C%AF"><span class="nav-number">1.2.</span> <span class="nav-text">SQL绕过技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%A7%E5%B0%8F%E5%86%99%E7%BB%95%E8%BF%87%E6%B3%A8%E5%85%A5"><span class="nav-number">1.2.1.</span> <span class="nav-text">大小写绕过注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8C%E5%86%99%E7%BB%95%E8%BF%87%E6%B3%A8%E5%85%A5"><span class="nav-number">1.2.2.</span> <span class="nav-text">双写绕过注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E7%A0%81%E7%BB%95%E8%BF%87%E6%B3%A8%E5%85%A5"><span class="nav-number">1.2.3.</span> <span class="nav-text">编码绕过注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E8%81%94%E6%B3%A8%E9%87%8A%E7%BB%95%E8%BF%87"><span class="nav-number">1.2.4.</span> <span class="nav-text">内联注释绕过</span></a></li></ol></li></ol></li></ol>
     </div>
 </div>
         </aside>
@@ -451,7 +485,7 @@
                 <input autocomplete="off"
                        autocorrect="off"
                        autocapitalize="off"
-                       placeholder="Search..."
+                       placeholder="搜索..."
                        spellcheck="false"
                        type="search"
                        class="search-input"
