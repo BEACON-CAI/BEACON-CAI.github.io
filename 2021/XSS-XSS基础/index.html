@@ -9,7 +9,7 @@
     
     <title>
         
-            对XSS的基础了解 |
+            XSS-XSS基础 |
         
         BEACON
     </title>
@@ -152,7 +152,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">对XSS的基础了解</span>
+            <span class="title-hover-animation">XSS-XSS基础</span>
         </div>
 
         
@@ -170,7 +170,7 @@
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;2021-02-26 00:00:00
+        <i class="fas fa-edit"></i>&nbsp;2021-03-30 10:43:02
     </span>
     
         <span class="article-categories article-meta-item">
@@ -193,6 +193,10 @@
                         <a href="/tags/XSS/">XSS</a>&nbsp;
                     </li>
                 
+                    <li>
+                        | <a href="/tags/%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/">基础学习</a>&nbsp;
+                    </li>
+                
             </ul>
         </span>
     
@@ -200,12 +204,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>1.6k Words</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>586 Words</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>5 Mins</span>
+            <i class="fas fa-clock"></i>&nbsp;<span>2 Mins</span>
         </span>
     
     
@@ -221,95 +225,70 @@
         
 
         <div class="article-content markdown-body">
-            <h1 id="XSS-XSS基础"><a href="#XSS-XSS基础" class="headerlink" title="XSS-XSS基础"></a>XSS-XSS基础</h1><p>XSS攻击即为跨站脚本攻击（Cross Site Scripting）</p>
-<blockquote>
-<p>通常指的是通过利用网页开发时留下的漏洞，通过巧妙的方法注入恶意指令代码到网页，使用户加载并执行攻击者恶意制造的网页程序。这些恶意网页程序通常是JavaScript，但实际上也可以包括Java、 VBScript、ActiveX、 Flash 或者甚至是普通的HTML。攻击成功后，攻击者可能得到包括但不限于更高的权限（如执行一些操作）、私密网页内容、会话和cookie等各种内容。</p>
-</blockquote>
-<p>前端漏洞，受害者为前端用户</p>
-<h2 id="攻击原理"><a href="#攻击原理" class="headerlink" title="攻击原理"></a>攻击原理</h2><blockquote>
-<p>HTML是一种超文本标记语言，通过将一些字符特殊地对待来区别文本和标记，例如，小于符号（&lt;）被看作是HTML标签的开始，<title>与</title>之间的字符是页面的标题等等。当动态页面中插入的内容含有这些特殊字符（如&lt;）时，用户浏览器会将其误认为是插入了HTML标签，当这些HTML标签引入了一段JavaScript脚本时，这些脚本程序就将会在用户浏览器中执行。所以，当这些特殊字符不能被动态页面检查或检查出现失误时，就将会产生XSS漏洞。</p>
-</blockquote>
-<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><p>XSS相比于钓鱼网站危害更大</p>
-<p>XSS具有以下特点：</p>
-<blockquote>
-<p>①由于XSS攻击在用户当前使用的应用程序中执行，用户将会看到与其有关的个性化信息，如账户信息或“欢迎回来”消息，克隆的Web站点不会显示个性化信息。</p>
-<p>②通常，在钓鱼攻击中使用的克隆Web站点一经发现，就会立即被关闭。</p>
-<p>③许多浏览器与安全防护软件产品都内置钓鱼攻击过滤器，可阻止用户访问恶意的克隆站点。</p>
-<p>④如果客户访问一个克隆的Web网银站点，银行一般不承担责任。但是，如果攻击者通过银行应用程序中的XSS漏洞攻击了银行客户，则银行将不能简单地推卸责任。</p>
-</blockquote>
-<h2 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h2><p>按攻击代码的工作方式分：</p>
-<p>1.持久行跨站（存储型）：</p>
-<p>  最直接的危害类型，跨站代码储存在服务器（数据库）</p>
-<p>  永久性储存</p>
-<p>2.非持久型跨站（反射型）：</p>
-<p>  反射型跨站脚本漏洞，最普遍的类型</p>
-<p>  一次性</p>
-<p>3.DOM跨站（DOM XSS）：</p>
-<p>  通过DOM操作前端代码输出时产生</p>
-<p>  一次性</p>
-<blockquote>
-<p>基于DOM的XSS漏洞是指受害者端的网页脚本在修改本地页面DOM环境时未进行合理的处置，而使得攻击脚本被执行。在整个攻击过程中，服务器响应的页面并没有发生变化，引起客户端脚本执行结果差异的原因是对本地DOM的恶意篡改利用。</p>
-</blockquote>
-<h2 id="形成原因"><a href="#形成原因" class="headerlink" title="形成原因"></a>形成原因</h2><p>XSS漏洞形成的主要原因是程序对于输入与输出没有做到严格的把控导致攻击脚本被当作有效代码执行</p>
-<h2 id="XSS漏洞测试流程"><a href="#XSS漏洞测试流程" class="headerlink" title="XSS漏洞测试流程"></a>XSS漏洞测试流程</h2><blockquote>
-<p>① 在目标上找输入点，比如查询接口、留言板</p>
-<p>② 输入一组 “特殊字符（&gt;，’，”等）+唯一识别字符” ，点击提交后，查看返回源码，看后端返回的数据是否有处理</p>
-<p>③ 通过搜索定位到唯一字符，结合唯一字符前后语法确定是否可以构造执行js的条件（构造闭合）</p>
-<p>④ 提交构造的脚本代码（以及各种绕过姿势），看是否可以成功执行，如果成功执行则说明存在XSS漏洞</p>
-</blockquote>
-<h2 id="常用XSS攻击手段与目的"><a href="#常用XSS攻击手段与目的" class="headerlink" title="常用XSS攻击手段与目的"></a>常用XSS攻击手段与目的</h2><blockquote>
-<p>1、盗用cookie，获取敏感信息。</p>
-<p>2、利用植入Flash，通过crossdomain权限设置进一步获取更高权限；或者利用Java等得到类似的操作。</p>
-<p>3、利用iframe、frame、XMLHttpRequest或上述Flash等方式，以（被攻击）用户的身份执行一些管理动作，或执行一些一般的如发微博、加好友、发私信等操作。</p>
-<p>4、利用可被攻击的域受到其他域信任的特点，以受信任来源的身份请求一些平时不允许的操作，如进行不当的投票活动。</p>
-<p>5、在访问量极大的一些页面上的XSS可以攻击一些小型网站，实现DDoS攻击的效果。</p>
-</blockquote>
-<h2 id="XSS基础过滤"><a href="#XSS基础过滤" class="headerlink" title="XSS基础过滤"></a>XSS基础过滤</h2><p>1.抓包重新插入，或修改前端HTML代码</p>
-<p>2.修改大小写，若正则匹配只匹配小写，则可绕过</p>
-<p>3.双写（拼凑），例如</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;scri<span class="tag">&lt;<span class="name">script</span>&gt;</span>pt&gt;alert(111)&lt;/scri<span class="tag">&lt;/<span class="name">script</span>&gt;<span class="name">pt</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>后台即使过滤script，也有只过滤一次的可能</p>
-<p>4.注释干扰，例如</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;scri<span class="comment">&lt;!--test--&gt;</span>pt&gt;alert(111)&lt;/sc<span class="comment">&lt;!--test--&gt;</span>ript&gt;</span><br></pre></td></tr></table></figure>
-
-<p>加上注释后，有绕过后台过滤机制的可能</p>
-<p>5.编码，例 </p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">x</span> <span class="attr">onerror</span>=<span class="string">alert(</span>&#x27;<span class="attr">xss</span>&#x27;)&gt;</span> </span><br></pre></td></tr></table></figure>
-
-<p>经过HTML编码为：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">x</span> <span class="attr">onerror</span>=<span class="string">&amp;#x61;&amp;#x6c;&amp;#x65;&amp;#x72;&amp;#x74;&amp;#x28;&amp;#x27;&amp;#x78;&amp;#x73;&amp;#x73;&amp;#x27;&amp;#x29;</span>&gt;</span> </span><br></pre></td></tr></table></figure>
-
-<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><h3 id="反射型xss（get-or-post）"><a href="#反射型xss（get-or-post）" class="headerlink" title="反射型xss（get or post）"></a>反射型xss（get or post）</h3><p>先判断有无过滤，然后写入xss代码</p>
-<p>示例：</p>
+            <h1 id="XSS-XSS基础"><a href="#XSS-XSS基础" class="headerlink" title="XSS-XSS基础"></a>XSS-XSS基础</h1><p>跨站脚本</p>
+<p>Cross-Site Scripting 简称为“CSS”，为避免与前端叠成样式表的缩写”CSS”冲突，故又称XSS</p>
+<h2 id="反射型XSS"><a href="#反射型XSS" class="headerlink" title="反射型XSS"></a>反射型XSS</h2><p>反射型XSS又称为非持久性XSS，该攻击一般具有一次性</p>
+<h3 id="攻击方式"><a href="#攻击方式" class="headerlink" title="攻击方式"></a>攻击方式</h3><p>通过点子邮件等方式发送包含XSS代码的恶意链接</p>
+<p>受害者访问该链接时，服务器接收请求并处理</p>
+<p>带有XSS代码的数据被发送给浏览器</p>
+<p>浏览器解析代码，触发XSS漏洞</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>pikachu漏洞练习平台-反射型XSS</p>
+<p>输入攻击代码</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript">alert(<span class="string">&quot;BEACON&quot;</span>)</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span> </span><br></pre></td></tr></table></figure>
 
-<h3 id="存储型xss"><a href="#存储型xss" class="headerlink" title="存储型xss"></a>存储型xss</h3><p>寻找输入点，然后进行xss攻击</p>
-<h3 id="DOM型XSS"><a href="#DOM型XSS" class="headerlink" title="DOM型XSS"></a>DOM型XSS</h3><h4 id="例一："><a href="#例一：" class="headerlink" title="例一："></a>例一：</h4><p><img  
+<p>输入点限制了输入长度</p>
+<p>代码审计修改最大长度</p>
+<p>输入攻击代码，成功触发</p>
+<p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/img/2256438-20210221173637274-1162009598.png"
-                      alt="img"
+                     data-src="/img/image-20210330143524202.png"
+                      alt="image-20210330143524202"
                 ></p>
-<p>我们先通过 “&gt; 闭合了herf标签，然后再插入相应的payload</p>
-<p>根据提示构造payload ‘</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x27;&gt;<span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;#&quot;</span> <span class="attr">onmouseover</span>=<span class="string">&quot;alert(&#x27;xss&#x27;)&quot;</span>&gt;</span> </span><br></pre></td></tr></table></figure>
+<h2 id="存储型XSS"><a href="#存储型XSS" class="headerlink" title="存储型XSS"></a>存储型XSS</h2><p>存储型XSS又成为持久型XSS，攻击脚本会被永久地存放在目标服务器的数据库或文件中，极具隐蔽性</p>
+<h3 id="攻击方式-1"><a href="#攻击方式-1" class="headerlink" title="攻击方式"></a>攻击方式</h3><p>攻击多见于论坛、博客、留言板</p>
+<p>攻击者将恶意脚本与正常信息一起注入帖子的内容</p>
+<p>帖子被服务器储存，恶意脚本随之被储存</p>
+<p>用户浏览被注入脚本的帖子，恶意脚本将会在其浏览器执行</p>
+<h3 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h3><p>pikachu漏洞练习平台-存储型XSS</p>
+<p>在留言板中输入攻击代码</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/img/image-20210330150612406.png"
+                      alt="image-20210330150612406"
+                ></p>
+<p>每进一次该页面，都会触发一次</p>
+<h2 id="DOM型XSS"><a href="#DOM型XSS" class="headerlink" title="DOM型XSS"></a>DOM型XSS</h2><p>DOM全称“Document Object Model”</p>
+<p>使用DOM能使程序和脚本能够动态地访问和更新文档的内容、结构和样式</p>
+<p>其为一种特殊的反射型XSS，是基于DOM文档对象模型的一种漏洞</p>
+<h3 id="攻击方式-2"><a href="#攻击方式-2" class="headerlink" title="攻击方式"></a>攻击方式</h3><p>用户请求一个经过专门设计的URL，它由攻击者提交，且其中包含XSS代码</p>
+<p>服务器的响应不会以任何形式包含攻击者的脚本</p>
+<p>当用户的浏览器处理这个响应时</p>
+<p>DOM对象会处理XSS代码，导致存在XSS漏洞</p>
+<h3 id="实例-2"><a href="#实例-2" class="headerlink" title="实例"></a>实例</h3><p>pikachu漏洞练习平台-DOM型XSS</p>
+<p>查看源码</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/img/image-20210330194018643.png"
+                      alt="image-20210330194018643"
+                ></p>
+<p>根据提示构造闭合即可</p>
+<p>构造如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x27;&gt;<span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;#&quot;</span> <span class="attr">onmouseover</span>=<span class="string">&quot;alert(&#x27;BEACON&#x27;)&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<h4 id="例二："><a href="#例二：" class="headerlink" title="例二："></a>例二：</h4><p><img  
+<p>效果是使得鼠标移到左下角图片上时会有弹出</p>
+<p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/img/2256438-20210221174421289-1365465828-1615636634143.png"
-                      alt="img"
+                     data-src="/img/image-20210330194357604.png"
+                      alt="image-20210330194357604"
                 ></p>
-<p>与前面不同的是，前面通过 getElementById 获取到了标签 Id 为 text的内容赋值给str</p>
-<p>然后又把 str 的内容通过字符串拼接的方式写到了 a 标签的 href 属性中，a标签会写到 Id 为 dom的 div 标签中</p>
-<p>这里则是定义了一个domxss函数</p>
-<p>利用 window.location.search 获取浏览器中URL的内容，然后赋值给 str</p>
-<p>然后经过URL解码和字符串分隔，取出URL中的参数内容</p>
-<p>再把 “+” 替换为 “ ”（空格），赋值给 xss</p>
-<p>最后把 xss 拼接到 a 标签中，然后写到 Id 为 dom 的 div 标签中</p>
-<p>跟前面的DOM不同的是，它的输入是从浏览器的URL中获取的</p>
-<h2 id="附"><a href="#附" class="headerlink" title="附"></a>附</h2><p><a class="link"   target="_blank" rel="noopener" href="https://www.cnblogs.com/dogecheng/p/11556221.html" >基于pikachu漏洞练习平台关于XSS介绍与练习<i class="fas fa-external-link-alt"></i></a></p>
+<p>构造如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x27; onclick=&quot;alert(&#x27;BEACON&#x27;)&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>效果是点击时会有弹出</p>
 
         </div>
 
@@ -321,13 +300,13 @@
                     <div class="article-prev">
                         <a class="prev"
                            rel="prev"
-                           href="/2021/pikachu%E6%BC%8F%E6%B4%9E%E5%BA%93%E7%BB%83%E4%B9%A0%E8%AE%B0%E5%BD%95/"
+                           href="/2021/XSS-XSS%E8%BF%9B%E9%98%B6/"
                         >
                             <span class="left arrow-icon flex-center">
                               <i class="fas fa-chevron-left"></i>
                             </span>
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">pikachu漏洞库练习记录</span>
+                                <span class="post-nav-title-item">XSS-XSS进阶</span>
                                 <span class="post-nav-item">Prev posts</span>
                             </span>
                         </a>
@@ -337,10 +316,10 @@
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2021/BUUCTF-%5BHCTF%202018%5Dadmin/"
+                           href="/2021/SQL-%5Bsqli-labs%5D/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">BUUCTF-[HCTF 2018]admin</span>
+                                <span class="post-nav-title-item">SQL-[sqli-labs]</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -463,7 +442,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#XSS-XSS%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">XSS-XSS基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%BB%E5%87%BB%E5%8E%9F%E7%90%86"><span class="nav-number">1.1.</span> <span class="nav-text">攻击原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%B9%E7%82%B9"><span class="nav-number">1.2.</span> <span class="nav-text">特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.3.</span> <span class="nav-text">类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BD%A2%E6%88%90%E5%8E%9F%E5%9B%A0"><span class="nav-number">1.4.</span> <span class="nav-text">形成原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XSS%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%B5%81%E7%A8%8B"><span class="nav-number">1.5.</span> <span class="nav-text">XSS漏洞测试流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8XSS%E6%94%BB%E5%87%BB%E6%89%8B%E6%AE%B5%E4%B8%8E%E7%9B%AE%E7%9A%84"><span class="nav-number">1.6.</span> <span class="nav-text">常用XSS攻击手段与目的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XSS%E5%9F%BA%E7%A1%80%E8%BF%87%E6%BB%A4"><span class="nav-number">1.7.</span> <span class="nav-text">XSS基础过滤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A0"><span class="nav-number">1.8.</span> <span class="nav-text">练习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8D%E5%B0%84%E5%9E%8Bxss%EF%BC%88get-or-post%EF%BC%89"><span class="nav-number">1.8.1.</span> <span class="nav-text">反射型xss（get or post）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E5%9E%8Bxss"><span class="nav-number">1.8.2.</span> <span class="nav-text">存储型xss</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DOM%E5%9E%8BXSS"><span class="nav-number">1.8.3.</span> <span class="nav-text">DOM型XSS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E4%B8%80%EF%BC%9A"><span class="nav-number">1.8.3.1.</span> <span class="nav-text">例一：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E4%BA%8C%EF%BC%9A"><span class="nav-number">1.8.3.2.</span> <span class="nav-text">例二：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%99%84"><span class="nav-number">1.9.</span> <span class="nav-text">附</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#XSS-XSS%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">XSS-XSS基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E5%B0%84%E5%9E%8BXSS"><span class="nav-number">1.1.</span> <span class="nav-text">反射型XSS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F"><span class="nav-number">1.1.1.</span> <span class="nav-text">攻击方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B"><span class="nav-number">1.1.2.</span> <span class="nav-text">实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E5%9E%8BXSS"><span class="nav-number">1.2.</span> <span class="nav-text">存储型XSS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">攻击方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DOM%E5%9E%8BXSS"><span class="nav-number">1.3.</span> <span class="nav-text">DOM型XSS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F-2"><span class="nav-number">1.3.1.</span> <span class="nav-text">攻击方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-2"><span class="nav-number">1.3.2.</span> <span class="nav-text">实例</span></a></li></ol></li></ol></li></ol>
     </div>
 </div>
         </aside>
