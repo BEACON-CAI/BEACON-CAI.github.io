@@ -9,7 +9,7 @@
     
     <title>
         
-            XSS-XSS基础 |
+            框架与CMS的区别 |
         
         BEACON FOREVER
     </title>
@@ -152,7 +152,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">XSS-XSS基础</span>
+            <span class="title-hover-animation">框架与CMS的区别</span>
         </div>
 
         
@@ -170,7 +170,7 @@
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;2021-03-30 10:43:02
+        <i class="fas fa-edit"></i>&nbsp;2021-06-12 10:05:08
     </span>
     
         <span class="article-categories article-meta-item">
@@ -178,7 +178,7 @@
             <ul>
                 
                     <li>
-                        <a href="/categories/WEB/">WEB</a>&nbsp;
+                        <a href="/categories/WEB%E7%9B%B8%E5%85%B3/">WEB相关</a>&nbsp;
                     </li>
                 
             </ul>
@@ -190,11 +190,11 @@
             <ul>
                 
                     <li>
-                        <a href="/tags/XSS/">XSS</a>&nbsp;
+                        <a href="/tags/CMS/">CMS</a>&nbsp;
                     </li>
                 
                     <li>
-                        | <a href="/tags/%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/">基础学习</a>&nbsp;
+                        | <a href="/tags/%E6%A1%86%E6%9E%B6/">框架</a>&nbsp;
                     </li>
                 
             </ul>
@@ -204,12 +204,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>586 字</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>954 字</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>2 分钟</span>
+            <i class="fas fa-clock"></i>&nbsp;<span>3 分钟</span>
         </span>
     
     
@@ -225,70 +225,33 @@
         
 
         <div class="article-content markdown-body">
-            <h1 id="XSS-XSS基础"><a href="#XSS-XSS基础" class="headerlink" title="XSS-XSS基础"></a>XSS-XSS基础</h1><p>跨站脚本</p>
-<p>Cross-Site Scripting 简称为“CSS”，为避免与前端叠成样式表的缩写”CSS”冲突，故又称XSS</p>
-<h2 id="反射型XSS"><a href="#反射型XSS" class="headerlink" title="反射型XSS"></a>反射型XSS</h2><p>反射型XSS又称为非持久性XSS，该攻击一般具有一次性</p>
-<h3 id="攻击方式"><a href="#攻击方式" class="headerlink" title="攻击方式"></a>攻击方式</h3><p>通过点子邮件等方式发送包含XSS代码的恶意链接</p>
-<p>受害者访问该链接时，服务器接收请求并处理</p>
-<p>带有XSS代码的数据被发送给浏览器</p>
-<p>浏览器解析代码，触发XSS漏洞</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>pikachu漏洞练习平台-反射型XSS</p>
-<p>输入攻击代码</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript">alert(<span class="string">&quot;BEACON&quot;</span>)</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span> </span><br></pre></td></tr></table></figure>
-
-<p>输入点限制了输入长度</p>
-<p>代码审计修改最大长度</p>
-<p>输入攻击代码，成功触发</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/img/image-20210330143524202.png"
-                      alt="image-20210330143524202"
-                ></p>
-<h2 id="存储型XSS"><a href="#存储型XSS" class="headerlink" title="存储型XSS"></a>存储型XSS</h2><p>存储型XSS又成为持久型XSS，攻击脚本会被永久地存放在目标服务器的数据库或文件中，极具隐蔽性</p>
-<h3 id="攻击方式-1"><a href="#攻击方式-1" class="headerlink" title="攻击方式"></a>攻击方式</h3><p>攻击多见于论坛、博客、留言板</p>
-<p>攻击者将恶意脚本与正常信息一起注入帖子的内容</p>
-<p>帖子被服务器储存，恶意脚本随之被储存</p>
-<p>用户浏览被注入脚本的帖子，恶意脚本将会在其浏览器执行</p>
-<h3 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h3><p>pikachu漏洞练习平台-存储型XSS</p>
-<p>在留言板中输入攻击代码</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/img/image-20210330150612406.png"
-                      alt="image-20210330150612406"
-                ></p>
-<p>每进一次该页面，都会触发一次</p>
-<h2 id="DOM型XSS"><a href="#DOM型XSS" class="headerlink" title="DOM型XSS"></a>DOM型XSS</h2><p>DOM全称“Document Object Model”</p>
-<p>使用DOM能使程序和脚本能够动态地访问和更新文档的内容、结构和样式</p>
-<p>其为一种特殊的反射型XSS，是基于DOM文档对象模型的一种漏洞</p>
-<h3 id="攻击方式-2"><a href="#攻击方式-2" class="headerlink" title="攻击方式"></a>攻击方式</h3><p>用户请求一个经过专门设计的URL，它由攻击者提交，且其中包含XSS代码</p>
-<p>服务器的响应不会以任何形式包含攻击者的脚本</p>
-<p>当用户的浏览器处理这个响应时</p>
-<p>DOM对象会处理XSS代码，导致存在XSS漏洞</p>
-<h3 id="实例-2"><a href="#实例-2" class="headerlink" title="实例"></a>实例</h3><p>pikachu漏洞练习平台-DOM型XSS</p>
-<p>查看源码</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/img/image-20210330194018643.png"
-                      alt="image-20210330194018643"
-                ></p>
-<p>根据提示构造闭合即可</p>
-<p>构造如下：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x27;&gt;<span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;#&quot;</span> <span class="attr">onmouseover</span>=<span class="string">&quot;alert(&#x27;BEACON&#x27;)&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>效果是使得鼠标移到左下角图片上时会有弹出</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/img/image-20210330194357604.png"
-                      alt="image-20210330194357604"
-                ></p>
-<p>构造如下：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x27; onclick=&quot;alert(&#x27;BEACON&#x27;)&quot;&gt;</span><br></pre></td></tr></table></figure>
-
-<p>效果是点击时会有弹出</p>
+            <h1 id="框架与CMS的区别"><a href="#框架与CMS的区别" class="headerlink" title="框架与CMS的区别"></a>框架与CMS的区别</h1><h2 id="简单区分："><a href="#简单区分：" class="headerlink" title="简单区分："></a>简单区分：</h2><h3 id="编程语言"><a href="#编程语言" class="headerlink" title="编程语言"></a>编程语言</h3><p>是负责实现整体业务的逻辑，如用户输入什么，应该返回什么</p>
+<p>编程语言好比盖房用的砖头，是为最基础的东西</p>
+<h3 id="框架与CMS"><a href="#框架与CMS" class="headerlink" title="框架与CMS"></a>框架与CMS</h3><p>两者都是由编程语言写出</p>
+<h4 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h4><p>框架提供主要程序代码和代码目录架构，方便开发者利用其来开发系统</p>
+<p>框架为毛坯房，需要去添砖加瓦，该有几间房，该怎么设计等等都可依照自己的喜好修建</p>
+<h4 id="CMS"><a href="#CMS" class="headerlink" title="CMS"></a>CMS</h4><p>CMS 是已经实现了的内容管理系统网站，用户使用CMS进行网站的二次开发</p>
+<p>CMS为商品房，仅需简单装修便可使用，但是原来有几间房、几扇门等等都是已经确定了的东西，不可改变</p>
+<h2 id="两者对比"><a href="#两者对比" class="headerlink" title="两者对比"></a>两者对比</h2><p><a class="link"   target="_blank" rel="noopener" href="https://my.oschina.net/u/3412071/blog/889229" >引用<i class="fas fa-external-link-alt"></i></a></p>
+<p>（以PHP为例）</p>
+<h3 id="难度方面"><a href="#难度方面" class="headerlink" title="难度方面"></a>难度方面</h3><p>框架所需的知识含金量高，需对面向对象编程由深入理解，亦需深刻懂得MVC原理、单入口原理、标签解析引擎原理等等，以方便灵活使用框架去开发，适合PHP基础比较全面的人使用</p>
+<p>CMS则不同，仅需要懂些许PHP语法还有一些相关的基础性的PHP开发知识，便可依葫芦画瓢使用CMS开发出一个简单的项目（速度较快，但不利于维护）</p>
+<h3 id="应用范畴"><a href="#应用范畴" class="headerlink" title="应用范畴"></a>应用范畴</h3><p>框架属于底层的东西，可用来开发任何类型的项目</p>
+<p>CMS则在应用范围上由局限性，某些类别的CMS仅适合开发相应类别的项目</p>
+<p>如：PHPCMS适合开发文章类型的管理系统，Ecshop适合开发商城类型的项目，Discuz适合开发论坛类型的项目</p>
+<p>若是使用Ecshop来开发论坛，那便会有许多地方需要修改，会多走弯路</p>
+<p><strong>另外，框架还可以开发CMS出来，但反过来，CMS就不能用来开发框架（会造成性能太低）</strong></p>
+<h3 id="开发特点"><a href="#开发特点" class="headerlink" title="开发特点"></a>开发特点</h3><blockquote>
+<p>在框架中，你可能看不到一个具体的控制器子类文件，所以基于框架的开发，首先要你自己来写控制器文件，还要安排在什么位置写，这些都有框架自己的规矩，虽然也可以灵活的修改文件夹的位置，但你要麻烦的去寻找为什么。</p>
+<p>而CMS等开源系统，这些文件都是帮你写好了的，位置也会帮你安排好，你在那些现成的文件上修修改改基本上就可以了。你会少很多事情。</p>
+</blockquote>
+<h3 id="灵活性"><a href="#灵活性" class="headerlink" title="灵活性"></a>灵活性</h3><p>框架可以随意项目模块架构，也可随意添加想要的功能</p>
+<p>CMS所有东西都是固有的，不方便修改</p>
+<h3 id="速度"><a href="#速度" class="headerlink" title="速度"></a>速度</h3><blockquote>
+<p>用框架去开发，开发的时候速度慢，但后续修改灵活，同时速度会很快，遇到问题可以马上知道处在哪里了，可谓是“一步到位、一针见血”。</p>
+<p>用CMS去开发：开发的时候速度快，但后续修改特别是添加功能模块的时候，就不够灵活，会造成速度很慢，甚至不大可能实现。</p>
+<p>打个比方：你用框架开发的项目，开发的时候可能需要2个月，但你后续升级项目，添加个什么功能可能只要1个星期。而你用CMS去开发，开发项目上线可能只要3个星期，但是你升级功能、添加新功能模块、可能也要3个星期甚至更多，还有可能实现不了，或者强加进去会造成该模块性能甚至整个系统的性能大大降低。而且每次升级都是这样。</p>
+</blockquote>
 
         </div>
 
@@ -297,29 +260,14 @@
         
             <div class="article-nav">
                 
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2021/XSS-XSS%E8%BF%9B%E9%98%B6/"
-                        >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">XSS-XSS进阶</span>
-                                <span class="post-nav-item">上一篇</span>
-                            </span>
-                        </a>
-                    </div>
-                
                 
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2021/SQL-%5Bsqli-labs%5D%201-22%20BasicInjections/"
+                           href="/2021/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">SQL-[sqli-labs] 1-22 BasicInjections</span>
+                                <span class="post-nav-title-item">渗透测试-基础入门</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -442,7 +390,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#XSS-XSS%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">XSS-XSS基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E5%B0%84%E5%9E%8BXSS"><span class="nav-number">1.1.</span> <span class="nav-text">反射型XSS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F"><span class="nav-number">1.1.1.</span> <span class="nav-text">攻击方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B"><span class="nav-number">1.1.2.</span> <span class="nav-text">实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E5%9E%8BXSS"><span class="nav-number">1.2.</span> <span class="nav-text">存储型XSS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">攻击方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DOM%E5%9E%8BXSS"><span class="nav-number">1.3.</span> <span class="nav-text">DOM型XSS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F-2"><span class="nav-number">1.3.1.</span> <span class="nav-text">攻击方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-2"><span class="nav-number">1.3.2.</span> <span class="nav-text">实例</span></a></li></ol></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A1%86%E6%9E%B6%E4%B8%8ECMS%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.</span> <span class="nav-text">框架与CMS的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E5%8C%BA%E5%88%86%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">简单区分：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80"><span class="nav-number">1.1.1.</span> <span class="nav-text">编程语言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A1%86%E6%9E%B6%E4%B8%8ECMS"><span class="nav-number">1.1.2.</span> <span class="nav-text">框架与CMS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A1%86%E6%9E%B6"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">框架</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CMS"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">CMS</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%A4%E8%80%85%E5%AF%B9%E6%AF%94"><span class="nav-number">1.2.</span> <span class="nav-text">两者对比</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9A%BE%E5%BA%A6%E6%96%B9%E9%9D%A2"><span class="nav-number">1.2.1.</span> <span class="nav-text">难度方面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E8%8C%83%E7%95%B4"><span class="nav-number">1.2.2.</span> <span class="nav-text">应用范畴</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E7%89%B9%E7%82%B9"><span class="nav-number">1.2.3.</span> <span class="nav-text">开发特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%81%B5%E6%B4%BB%E6%80%A7"><span class="nav-number">1.2.4.</span> <span class="nav-text">灵活性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9F%E5%BA%A6"><span class="nav-number">1.2.5.</span> <span class="nav-text">速度</span></a></li></ol></li></ol></li></ol>
     </div>
 </div>
         </aside>
