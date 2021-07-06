@@ -419,6 +419,13 @@
           <div class="swiper-bgmask" style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;"></div>
             <div class="flag">
               
+              <div class="swiper-video">
+                <video class="full-video" poster="/" autoplay loop muted style="width: 100%;height:100%;object-fit: cover;">
+                  <source style="width: 100%;height: 100vh;" src="https://assets.mixkit.co/videos/preview/mixkit-flying-across-the-surface-of-a-rocky-planet-14540-large.mp4">
+                </video>
+                <div class="swiper-video-maskBox"></div>
+              </div>
+              
               <div class="img-mask swiper-lazy swiper-default-bgImg" data-background="/medias/preview.jpg" style="height: 100%; background-size: cover; 
                 background-position: center center;">
                 <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>   
@@ -986,10 +993,10 @@
 @media (min-width: 992px) {
   
     .swiper-video {
-      display: none;
+      display: block;
     }
     .swiper-default-bgImg {
-      display: block;  
+      display: none;  
     }
   
 }
