@@ -419,22 +419,15 @@
           <div class="swiper-bgmask" style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;"></div>
             <div class="flag">
               
-              <div class="swiper-video">
-                <video class="full-video" poster="/" autoplay loop muted style="width: 100%;height:100%;object-fit: cover;">
-                  <source style="width: 100%;height: 100vh;" src="https://assets.mixkit.co/videos/preview/mixkit-flying-across-the-surface-of-a-rocky-planet-14540-large.mp4">
-                </video>
-                <div class="swiper-video-maskBox"></div>
-              </div>
-              
               <div class="img-mask swiper-lazy swiper-default-bgImg" data-background="/medias/preview.jpg" style="height: 100%; background-size: cover; 
                 background-position: center center;">
                 <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>   
               </div>
               <div class="flag-text">
                 <div class="flag-text-content">
-                  <div class="title ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.5s" swiper-animate-delay="0.1s">BEACON</div>
+                  <div class="title ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="3.5s" swiper-animate-delay="0.1s">BEACON</div>
                   
-                    <div class="ani animated default-excerpt" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.5s" swiper-animate-delay="0.1s">
+                    <div class="ani animated default-excerpt" swiper-animate-effect="fadeInDown" swiper-animate-duration="3.5s" swiper-animate-delay="0.1s">
                       <vue-typed-js :strings="defaultDesc" :loop="defaultDescTypedLoop" :typeSpeed="1000">
                         <h1 class="typing"></h1>
                       </vue-typed-js>
@@ -443,10 +436,10 @@
                 </div>
                 <div style="display: flex;" class="flag-text-btns">
                   
-                    <div class="ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.5s" swiper-animate-delay="0.1s"><a href="/archives" class="read-more border-color swiper-btn-color" style="display: inline-block; z-index:1;">滞留</a></div>
+                    <div class="ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="3.5s" swiper-animate-delay="0.1s"><a href="/archives" class="read-more border-color swiper-btn-color" style="display: inline-block; z-index:1;">滞留</a></div>
                   
                   
-                    <div class="ani animated" style="margin-left: 10px;" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.5s" swiper-animate-delay="0.1s"><a href="" class="read-more border-color swiper-btn-color2" style="display: inline-block; z-index:1;border: 1px solid white;">离去</a></div>
+                    <div class="ani animated" style="margin-left: 10px;" swiper-animate-effect="fadeInDown" swiper-animate-duration="3.5s" swiper-animate-delay="0.1s"><a href="" class="read-more border-color swiper-btn-color2" style="display: inline-block; z-index:1;border: 1px solid white;">离去</a></div>
                   
                 </div>
               </div>
@@ -613,7 +606,7 @@
   transition: color 0.3s;
 }
 .flag-text .title a:hover {
-  color: #FF4000;
+  color: #ff3300;
 }
 .flag-text .excerpt {
   color: #eee;
@@ -887,8 +880,8 @@
   }
   .swiper-btn-color:hover,
   .swiper-btn-color2:hover {
-    background-color: #FF4000;
-    border: 1px solid #FF4000!important;
+    background-color: #ff3300;
+    border: 1px solid #ff3300!important;
   }
   .flag-text-btns {
     justify-content: center;
@@ -993,10 +986,10 @@
 @media (min-width: 992px) {
   
     .swiper-video {
-      display: block;
+      display: none;
     }
     .swiper-default-bgImg {
-      display: none;  
+      display: block;  
     }
   
 }

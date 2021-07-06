@@ -714,25 +714,18 @@
 
   <div id="myComment">
     
-      <!-- 来必力City版安装代码 -->
-<div id="lv-container" data-id="city" data-uid="==" style="margin: 30px;">
-  <script type="text/javascript">
-     (function(d, s) {
-         var j, e = d.getElementsByTagName(s)[0];
-  
-         if (typeof LivereTower === 'function') { return; }
-  
-         j = d.createElement(s);
-         j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-         j.async = true;
-  
-         e.parentNode.insertBefore(j, e);
-     })(document, 'script');
-  </script>
-  <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
-  </div>
-  <!-- City版安装代码已完成 -->
-  
+      <script src="https://unpkg.com/minivaline/dist/MiniValine.min.js"></script>
+<div class="comment"></div>
+<script>
+  new MiniValine({
+      el: '.comment',
+      appId: '',
+      appKey: '',
+      placeholder: '说点什么~',
+      notify: false,
+			verify: false,
+  });
+</script>
     
   </div>
 
