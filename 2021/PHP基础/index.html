@@ -9,8 +9,6 @@
     
     <title>
         
-            XSS-XSS基础 |
-        
         BEACON FOREVER
     </title>
     <link rel="stylesheet" href="/css/style.css">
@@ -152,7 +150,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">XSS-XSS基础</span>
+            <span class="title-hover-animation"></span>
         </div>
 
         
@@ -170,7 +168,7 @@
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;2021-03-30 10:43:02
+        <i class="fas fa-edit"></i>&nbsp;2021-07-08 20:31:10
     </span>
     
         <span class="article-categories article-meta-item">
@@ -178,7 +176,7 @@
             <ul>
                 
                     <li>
-                        <a href="/categories/WEB/">WEB</a>&nbsp;
+                        <a href="/categories/PHP/">PHP</a>&nbsp;
                     </li>
                 
             </ul>
@@ -190,11 +188,7 @@
             <ul>
                 
                     <li>
-                        <a href="/tags/XSS/">XSS</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/">基础学习</a>&nbsp;
+                        <a href="/tags/PHP/">PHP</a>&nbsp;
                     </li>
                 
             </ul>
@@ -204,12 +198,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>586 Words</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>994 Words</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>2 Mins</span>
+            <i class="fas fa-clock"></i>&nbsp;<span>3 Mins</span>
         </span>
     
     
@@ -225,70 +219,181 @@
         
 
         <div class="article-content markdown-body">
-            <h1 id="XSS-XSS基础"><a href="#XSS-XSS基础" class="headerlink" title="XSS-XSS基础"></a>XSS-XSS基础</h1><p>跨站脚本</p>
-<p>Cross-Site Scripting 简称为“CSS”，为避免与前端叠成样式表的缩写”CSS”冲突，故又称XSS</p>
-<h2 id="反射型XSS"><a href="#反射型XSS" class="headerlink" title="反射型XSS"></a>反射型XSS</h2><p>反射型XSS又称为非持久性XSS，该攻击一般具有一次性</p>
-<h3 id="攻击方式"><a href="#攻击方式" class="headerlink" title="攻击方式"></a>攻击方式</h3><p>通过点子邮件等方式发送包含XSS代码的恶意链接</p>
-<p>受害者访问该链接时，服务器接收请求并处理</p>
-<p>带有XSS代码的数据被发送给浏览器</p>
-<p>浏览器解析代码，触发XSS漏洞</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>pikachu漏洞练习平台-反射型XSS</p>
-<p>输入攻击代码</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript">alert(<span class="string">&quot;BEACON&quot;</span>)</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span> </span><br></pre></td></tr></table></figure>
-
-<p>输入点限制了输入长度</p>
-<p>代码审计修改最大长度</p>
-<p>输入攻击代码，成功触发</p>
-<p><img  
+            <h1 id="PHP基础"><a href="#PHP基础" class="headerlink" title="PHP基础"></a>PHP基础</h1><h2 id="认识PHP"><a href="#认识PHP" class="headerlink" title="认识PHP"></a>认识PHP</h2><h3 id="PHP是什么"><a href="#PHP是什么" class="headerlink" title="PHP是什么"></a>PHP是什么</h3><blockquote>
+<p>PHP（PHP: Hypertext Preprocessor）即“<a class="link"   target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E8%B6%85%E6%96%87%E6%9C%AC" >超文本<i class="fas fa-external-link-alt"></i></a><a class="link"   target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8" >预处理器<i class="fas fa-external-link-alt"></i></a>”，是在<a class="link"   target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%9C%8D%E5%8A%A1%E5%99%A8/100571" >服务器<i class="fas fa-external-link-alt"></i></a>端执行的<a class="link"   target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80/1379708" >脚本语言<i class="fas fa-external-link-alt"></i></a>，尤其适用于Web开发并可嵌入<a class="link"   target="_blank" rel="noopener" href="https://baike.baidu.com/item/HTML/97049" >HTML<i class="fas fa-external-link-alt"></i></a>中</p>
+<p>PHP语法学习了<a class="link"   target="_blank" rel="noopener" href="https://baike.baidu.com/item/C/7252092" >C<i class="fas fa-external-link-alt"></i></a>语言，吸纳了<a class="link"   target="_blank" rel="noopener" href="https://baike.baidu.com/item/Java/85979" >Java<i class="fas fa-external-link-alt"></i></a>和<a class="link"   target="_blank" rel="noopener" href="https://baike.baidu.com/item/Perl/851577" >Perl<i class="fas fa-external-link-alt"></i></a>多个语言的特色，并根据它们的长项持续改进提升自己，例如java的面向对象编程，该语言当初创建的主要目标是让开发人员快速编写出优质的web网站</p>
+</blockquote>
+<ol>
+<li>通用：指跨平台，如：Windows、Linux、MacOS</li>
+<li>开源：意味着你可以轻松获取全部源代码，并进行定制或扩展</li>
+<li>免费：意味着你不必为PHP花一分钱，哪怕用在商业项目中</li>
+<li>服务器端：意味着你必须将它安装在服务器环境下才可以使用</li>
+<li>脚本语言：解释型语言，按编写顺序执行。是指不需要编译,直接由解释器/虚拟机执行的编程语言</li>
+</ol>
+<h3 id="PHP能做什么"><a href="#PHP能做什么" class="headerlink" title="PHP能做什么"></a>PHP能做什么</h3><ol>
+<li>可以快速动态的生成HTML页面</li>
+<li>可以返回前端需要的各种类型的数据</li>
+<li>可以高效安全的处理表单数据</li>
+<li>可以安全的操作服务器上的文件</li>
+<li>可以控制与客户端的会话( Cookie/Session )</li>
+<li>可以对用户的行为进行授权控制</li>
+<li>可以高效安全的操作各种类型的数据库</li>
+<li>通过扩展，可以实现加密，压缩等其他功能</li>
+<li>可以提供接口数据，包括：小程序、APP、等其他语言</li>
+</ol>
+<h3 id="PHP程序执行流程"><a href="#PHP程序执行流程" class="headerlink" title="PHP程序执行流程"></a>PHP程序执行流程</h3><p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/img/image-20210330143524202.png"
-                      alt="image-20210330143524202"
+                     data-src="/img/image-20210708204047659.png"
+                      alt="image-20210708204047659"
                 ></p>
-<h2 id="存储型XSS"><a href="#存储型XSS" class="headerlink" title="存储型XSS"></a>存储型XSS</h2><p>存储型XSS又成为持久型XSS，攻击脚本会被永久地存放在目标服务器的数据库或文件中，极具隐蔽性</p>
-<h3 id="攻击方式-1"><a href="#攻击方式-1" class="headerlink" title="攻击方式"></a>攻击方式</h3><p>攻击多见于论坛、博客、留言板</p>
-<p>攻击者将恶意脚本与正常信息一起注入帖子的内容</p>
-<p>帖子被服务器储存，恶意脚本随之被储存</p>
-<p>用户浏览被注入脚本的帖子，恶意脚本将会在其浏览器执行</p>
-<h3 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h3><p>pikachu漏洞练习平台-存储型XSS</p>
-<p>在留言板中输入攻击代码</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/img/image-20210330150612406.png"
-                      alt="image-20210330150612406"
-                ></p>
-<p>每进一次该页面，都会触发一次</p>
-<h2 id="DOM型XSS"><a href="#DOM型XSS" class="headerlink" title="DOM型XSS"></a>DOM型XSS</h2><p>DOM全称“Document Object Model”</p>
-<p>使用DOM能使程序和脚本能够动态地访问和更新文档的内容、结构和样式</p>
-<p>其为一种特殊的反射型XSS，是基于DOM文档对象模型的一种漏洞</p>
-<h3 id="攻击方式-2"><a href="#攻击方式-2" class="headerlink" title="攻击方式"></a>攻击方式</h3><p>用户请求一个经过专门设计的URL，它由攻击者提交，且其中包含XSS代码</p>
-<p>服务器的响应不会以任何形式包含攻击者的脚本</p>
-<p>当用户的浏览器处理这个响应时</p>
-<p>DOM对象会处理XSS代码，导致存在XSS漏洞</p>
-<h3 id="实例-2"><a href="#实例-2" class="headerlink" title="实例"></a>实例</h3><p>pikachu漏洞练习平台-DOM型XSS</p>
-<p>查看源码</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/img/image-20210330194018643.png"
-                      alt="image-20210330194018643"
-                ></p>
-<p>根据提示构造闭合即可</p>
-<p>构造如下：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x27;&gt;<span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;#&quot;</span> <span class="attr">onmouseover</span>=<span class="string">&quot;alert(&#x27;BEACON&#x27;)&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>效果是使得鼠标移到左下角图片上时会有弹出</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/img/image-20210330194357604.png"
-                      alt="image-20210330194357604"
-                ></p>
-<p>构造如下：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x27; onclick=&quot;alert(&#x27;BEACON&#x27;)&quot;&gt;</span><br></pre></td></tr></table></figure>
-
-<p>效果是点击时会有弹出</p>
+<h3 id="PHP学习需了解"><a href="#PHP学习需了解" class="headerlink" title="PHP学习需了解"></a>PHP学习需了解</h3><ol>
+<li>HTML：超文本标记语言</li>
+<li>CSS：层叠样式表</li>
+<li>JavaScript：前端脚本编程语言</li>
+</ol>
+<h3 id="PHP版本"><a href="#PHP版本" class="headerlink" title="PHP版本"></a>PHP版本</h3><table>
+<thead>
+<tr>
+<th><strong>版本</strong></th>
+<th><strong>发布日期</strong></th>
+<th><strong>最终支持</strong></th>
+<th align="center"><strong>相关更新及备注</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1.0</td>
+<td>1995-06-08</td>
+<td>–</td>
+<td align="center">首次使用</td>
+</tr>
+<tr>
+<td>2.0</td>
+<td>1996-04-16</td>
+<td>–</td>
+<td align="center">针对PHP 1.0的改进版，速度更快、体积更小，更容易产生动态网页。</td>
+</tr>
+<tr>
+<td>3.0</td>
+<td>1998-06-06</td>
+<td>2000-10-20</td>
+<td align="center">Zeev Suraski和Andi Gutmans重写了底层</td>
+</tr>
+<tr>
+<td>4.0</td>
+<td>2000-05-22</td>
+<td>2001-06-23</td>
+<td align="center">增加了Zend引擎</td>
+</tr>
+<tr>
+<td>4.1</td>
+<td>2001-12-10</td>
+<td>2002-03-12</td>
+<td align="center">加入了superglobal(超全局的概念，即$_GET、$_POST等)</td>
+</tr>
+<tr>
+<td>4.2</td>
+<td>2002-04-22</td>
+<td>2002-09-06</td>
+<td align="center">默认禁用register_globals</td>
+</tr>
+<tr>
+<td>4.3</td>
+<td>2002-12-27</td>
+<td>2005-03-31</td>
+<td align="center">引入了命令行界面CLI用来不用CGI</td>
+</tr>
+<tr>
+<td>4.4</td>
+<td>2005-07-11</td>
+<td>2008-08-08</td>
+<td align="center">修复了一些致命错误</td>
+</tr>
+<tr>
+<td>5.0</td>
+<td>2004-07-13</td>
+<td>2005-09-05</td>
+<td align="center">ZendⅡ引擎</td>
+</tr>
+<tr>
+<td>5.1</td>
+<td>2005-11-24</td>
+<td>2006-08-24</td>
+<td align="center">引入了编译器来提高性能、增加了PDO作为访问数据库的接口</td>
+</tr>
+<tr>
+<td>5.2</td>
+<td>2006-11-02</td>
+<td>2011-01-06</td>
+<td align="center">默认启用过滤器扩展</td>
+</tr>
+<tr>
+<td>5.3</td>
+<td>2009-06-30</td>
+<td>2014-08-14</td>
+<td align="center">支持命名空间;使用XMLReader和XMLWriter增强XML支持;支持SOAP ,延迟静态绑定，跳转标签（有限的goto）, 闭包，Native PHP archives。</td>
+</tr>
+<tr>
+<td>5.4</td>
+<td>2012-03-01</td>
+<td>2015-09-03</td>
+<td align="center">支持Trait、简短数组表达式。移除了register_globals, safe_mode, allow_call_time_pass_reference, session_register(), session_unregister(), magic_quotes以及session_is_registered()。加入了内建的Web服务器。增强了性能，减小内存使用量。</td>
+</tr>
+<tr>
+<td>5.5</td>
+<td>2013-06-20</td>
+<td>2016-07-10</td>
+<td align="center">支持generators，用于异常处理的finally ，将OpCache（基于 Zend Optimizer+）加入官方发布中。</td>
+</tr>
+<tr>
+<td>5.6</td>
+<td>2014-08-28</td>
+<td>2018-12-31</td>
+<td align="center">常数标量表达式、可变参数函数、参数拆包、新的求幂运算符、函数和常量的use语句的扩展、新的phpdbg调试器作为SAPI模块，以及其他更小的改进</td>
+</tr>
+<tr>
+<td>6.x</td>
+<td>未发布</td>
+<td>–</td>
+<td align="center">取消掉的、从未正式发布的PHP版本。</td>
+</tr>
+<tr>
+<td>7.0</td>
+<td>2015-12-03</td>
+<td>2018-12-03</td>
+<td align="center">Zend Engine 3 (性能提升并在Windows上支持 64-bit 整数)，统一的变量语法， 基于抽象语法树编译过程。</td>
+</tr>
+<tr>
+<td>7.1</td>
+<td>2016-12-01</td>
+<td>2019-12-01</td>
+<td align="center">void返回值类型，类常量，可见性修饰符</td>
+</tr>
+<tr>
+<td>7.2</td>
+<td>2017-11-30</td>
+<td>2020-11-30</td>
+<td align="center">对象参数和返回类型提示、抽象方法重写等</td>
+</tr>
+<tr>
+<td>7.3</td>
+<td>2018-12-06</td>
+<td>2021-12-06</td>
+<td align="center">PCRE2支持等</td>
+</tr>
+<tr>
+<td>7.4</td>
+<td>2019-11-28</td>
+<td>2022-11-28</td>
+<td align="center">改进OpenSSL、弱引用等</td>
+</tr>
+<tr>
+<td>8.0</td>
+<td>2020年 S4或2021年 S1</td>
+<td>2023年 S4或2024年 S1</td>
+<td align="center">JIT、数组负索引等</td>
+</tr>
+</tbody></table>
 
         </div>
 
@@ -297,29 +402,14 @@
         
             <div class="article-nav">
                 
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2021/XSS-XSS%E8%BF%9B%E9%98%B6/"
-                        >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">XSS-XSS进阶</span>
-                                <span class="post-nav-item">Prev posts</span>
-                            </span>
-                        </a>
-                    </div>
-                
                 
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2021/SQL-%5Bsqli-labs%5D%201-22%20BasicInjections/"
+                           href="/2021/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">SQL-[sqli-labs] 1-22 BasicInjections</span>
+                                <span class="post-nav-title-item">渗透测试-信息收集</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -442,7 +532,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#XSS-XSS%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">XSS-XSS基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E5%B0%84%E5%9E%8BXSS"><span class="nav-number">1.1.</span> <span class="nav-text">反射型XSS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F"><span class="nav-number">1.1.1.</span> <span class="nav-text">攻击方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B"><span class="nav-number">1.1.2.</span> <span class="nav-text">实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E5%9E%8BXSS"><span class="nav-number">1.2.</span> <span class="nav-text">存储型XSS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">攻击方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DOM%E5%9E%8BXSS"><span class="nav-number">1.3.</span> <span class="nav-text">DOM型XSS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F-2"><span class="nav-number">1.3.1.</span> <span class="nav-text">攻击方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-2"><span class="nav-number">1.3.2.</span> <span class="nav-text">实例</span></a></li></ol></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#PHP%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">PHP基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A4%E8%AF%86PHP"><span class="nav-number">1.1.</span> <span class="nav-text">认识PHP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PHP%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">1.1.1.</span> <span class="nav-text">PHP是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PHP%E8%83%BD%E5%81%9A%E4%BB%80%E4%B9%88"><span class="nav-number">1.1.2.</span> <span class="nav-text">PHP能做什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PHP%E7%A8%8B%E5%BA%8F%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B"><span class="nav-number">1.1.3.</span> <span class="nav-text">PHP程序执行流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PHP%E5%AD%A6%E4%B9%A0%E9%9C%80%E4%BA%86%E8%A7%A3"><span class="nav-number">1.1.4.</span> <span class="nav-text">PHP学习需了解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PHP%E7%89%88%E6%9C%AC"><span class="nav-number">1.1.5.</span> <span class="nav-text">PHP版本</span></a></li></ol></li></ol></li></ol>
     </div>
 </div>
         </aside>
